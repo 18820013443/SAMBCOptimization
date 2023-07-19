@@ -39,6 +39,8 @@ class SAMBCOptimization:
         ExcelUtils().ConvertXlsToXlsx(os.path.join(self.mainFolder, 'ZOCR.xls'))
         self.dfZOCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZOCR.xlsx', 'ZOCR')
         
+        # 读取dfZCCR
+        self.dfZCCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZCCR.xlsx', 'Sheet1')
 
     #------------------------------ZDER的操作------------------------------#
 
@@ -87,6 +89,32 @@ class SAMBCOptimization:
     #------------------------------ZOCR的操作------------------------------#
 
 
+    #------------------------------ZCCR的操作------------------------------#
+
+    def CalculateNotSatisfiedQty(self):
+        # 将字符串列转换为数值类型
+        self.dfMain['未满足数量'] = pd.to_numeric(self.dfMain['未满足数量'])
+        self.dfMain['下单数量'] = pd.to_numeric(self.dfMain['下单数量'])
+        self.dfMain['分货数量'] = pd.to_numeric(self.dfMain['分货数量'])
+
+        # 计算未满足数量
+        self.dfMain['未满足数量'] = self.dfMain['下单数量'] - self.dfMain['分货数量']
+        pass
+
+    def WriteZccrCutReasonToDfMain(self):
+        if self.dfZCCR is None:
+            return
+
+        self.CalculateNotSatisfiedQty()
+
+        
+    
+
+
+
+    #------------------------------ZCCR的操作------------------------------#
+
+
     def Main(self):
         # filePath = r'C:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\Input Files\ZDER.xlsx'
         # timeStart = time.time()
@@ -95,6 +123,7 @@ class SAMBCOptimization:
         self.ReadFilesToDataFrame()
         self.AppendDfZderToDfMain()
         self.InsertZocrOrderValueToDfMain()
+        self.WriteZccrCutReasonToDfMain()
         pass
         # print(df)
 
