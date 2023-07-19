@@ -1,0 +1,105 @@
+# 测试环境变量
+isTestMode:
+  True
+
+
+# ZDER要保留的栏位，以及要修改成对应的字段名
+zderRevisedColumns:
+  Order Date: "分货日"
+  Delivery Date (From): "到货日"
+  Sold To Name -   EN: "客户名称"
+  Sold To Customer: "客户代码"
+  Ship To Customer: "付运点代码"
+  Customer PO No: "客户订单号"
+  Order No: "宝洁订单号"
+  Plant: "出货仓"
+  Material: "宝洁产品代码"
+  Material Description: "产品描述"
+  UOM: "单位"
+  Order Quantity: "下单数量"
+  Confirmed Order Quantity: "有效下单数量"
+  Delivery Quantity: "分货数量"
+  Delivery No: "交货号"
+  Price Braket: "固定箱数折扣"
+  Ord Reason: "AO类型"
+  Free Goods: "Free Goods"
+
+# 最终报表field list
+finalReportFieldList:
+  - 渠道
+  - 区域
+  - 市场
+  - 客户简称
+  - 订单生成日
+  - 分货日
+  - 到货日
+  - 客户名称
+  - 客户代码
+  - 付运点代码
+  - 客户订单号
+  - 宝洁订单号
+  - 出货仓
+  - 产品条码
+  - 客户产品代码
+  - 宝洁产品代码
+  - 产品描述
+  - 品类
+  - 箱规
+  - 单位
+  - 下单数量
+  - 有效下单数量
+  - 分货数量
+  - 软转换产品对应新码
+  - 新码实际分货数量
+  - 交货号
+  - 固定箱数折扣
+  - 200箱不含税价
+  - 分货金额含税（供参考，发票为准）
+  - 订单类型
+  - AO类型
+  - 未满足数量
+  - 未满足原因代码
+  - 未满足原因中文描述
+  - 未满足单品补货指引
+  - MSU/sale unit
+  - 下单数量MSU
+  - 有效下单数量 MSU
+  - 分货数量 MSU
+  - 未满足数量MSU
+  - 促销装配额开放日缺货Y/N
+  - Free Goods
+
+
+# zocrDeletedColumnList:
+#   'Order date', 
+#   'Sold-to Party', 
+#   'Ship-to Party',
+#   'Customer PO No.', 
+#   'Sales Order No.', 
+#   'Item', 
+#   'Material No.',
+#   'Material Description', 
+#   'Sales UoM', 
+#   'Order Quantity',
+#        'Delivery Creation Qty', 
+#        'Order Value', 'Plant', 'Item Barcode',
+#        'Order status'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
