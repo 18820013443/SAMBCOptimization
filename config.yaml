@@ -24,6 +24,24 @@ zderRevisedColumns:
   Ord Reason: "AO类型"
   Free Goods: "Free Goods"
 
+zeerReservedColumns:
+  Document Date: "分货日"
+  SAP Order: "宝洁订单号"
+  Customer PO: "客户订单号"
+  Delivery Date: "到货日"
+  Material: "宝洁产品代码"
+  Material Entered: "客户产品代码"
+  Material Quantity: "下单数量"
+  Unit of Measure: "单位"
+  Sold-to Party: "客户代码"
+  Ship-to Party: "付运点代码"
+
+# ZEER删选条件
+zeerScreenConditionList:
+  - doesnt exist
+  - Material not Active
+  - Error2
+
 # 最终报表field list
 finalReportFieldList:
   - 渠道

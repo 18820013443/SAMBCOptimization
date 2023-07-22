@@ -10,6 +10,8 @@ from ExcelUtils import ExcelUtils
 class SAMBCOptimization:
     def __init__(self) -> None:
         self.Initialize()
+        self.dfMain = None
+
 
         self.mainFolder = '%s\\Input Files' % os.getcwd() if self.isTestMode else os.getcwd()
 
@@ -19,8 +21,11 @@ class SAMBCOptimization:
 
         self.isTestMode = self.settings['isTestMode']
         self.zderRevisedColumns = self.settings['zderRevisedColumns']
-        self.zderzderReservedColumnList = self.zderRevisedColumns.keys()
+        self.zderReservedColumnList = self.zderRevisedColumns.keys()
         self.finalReportFieldList = self.settings['finalReportFieldList']
+        self.zeerScreenConditionList = self.settings['zeerScreenConditionList']
+        self.zeerReservedColumns = self.settings['zeerReservedColumns']
+        self.zeerReservedColumnsList = self.zeerReservedColumns.keys()
         pass
 
     def ReadFilesToDataFrame(self):
@@ -38,10 +43,34 @@ class SAMBCOptimization:
         # 读取dfZCCR
         self.dfZCCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZCCR.xlsx', 'Sheet1')
 
+        # 读取dfVBAK
+        # self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'Sheet1')
+
+        # 读取dfVBAP
+        self.dfVBAP = PandasUtils.GetDataFrame(self.mainFolder, 'VBAP.xlsx', 'VBAP')
+
+        # 读取dfLIPS
+        self.dfLIPS = PandasUtils.GetDataFrame(self.mainFolder, 'LIPS.xlsx', 'Sheet1')
+
+        # 读取dfOpenAlloment
+        self.dfOpenAllotment = PandasUtils.GetDataFrame(self.mainFolder, 'SAMBC Open Allotment List.xlsx', 'Sheet1')
+
+        # 读取dfZEER
+        self.dfZEER = PandasUtils.GetDataFrame(self.mainFolder, 'ZEER.xlsx', 'Sheet1')
+
+        # 读取dfCustomerList
+        self.dfCustomerList = PandasUtils.GetDataFrame(self.mainFolder, 'SAMBC Customer List.xlsx', 'Sheet1')
+
+        # 读取dfPriceList
+        self.dfPriceList = PandasUtils.GetDataFrame(self.mainFolder, 'SAMBC Price List.xlsx', 'Sheet1')
+
+        # 读取dfCutReasonList
+        self.dfCutReasonList = PandasUtils.GetDataFrame(self.mainFolder, 'SAMBC Parameters.xlsx', 'Cut Reason List')
+
     # ------------------------------ZDER的操作Start------------------------------#
 
     def DeleteUselessColumnsInDfZder(self):
-        self.dfZDER = PandasUtils.DeleteColumns(self.dfZDER, self.zderzderReservedColumnList)
+        self.dfZDER = PandasUtils.DeleteColumns(self.dfZDER, self.zderReservedColumnList)
 
     def RenameFieldNameForDfZder(self):
         self.dfZDER.rename(columns=self.zderRevisedColumns, inplace=True)
@@ -51,7 +80,7 @@ class SAMBCOptimization:
 
         # 如果columnName不在finalReportFieldList中，则需要将columnName加到dfZDER中
         for columnName in self.finalReportFieldList:
-            if not columnName in self.zderzderReservedColumnList:
+            if not columnName in self.zderReservedColumnList:
                 appendColumnList.append(columnName)
 
         self.dfZDER[appendColumnList] = ""
@@ -79,9 +108,6 @@ class SAMBCOptimization:
         PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfZOCR, ['宝洁订单号', '宝洁产品代码'],
                                             ['Sales Order No.', 'Material No.'], ['下单数量'], ['Order Value'])
 
-        # self.dfMain.loc[(self.dfMain['宝洁订单号'] == self.dfZOCR['Sales Order No.']) & (self.dfMain['宝洁产品代码'] == self.dfZOCR['Material No.']), '下单数量'] = self.dfZOCR['Order Value']
-        # self.dfMain = pd.merge(self.dfMain, self.dfZOCR, left_on=['宝洁订单号', '宝洁产品代码'], right_on=['Sales Order No.', 'Material No.'])
-
     # ------------------------------ZOCR的操作End------------------------------#
 
     # ------------------------------ZCCR的操作Start------------------------------#
@@ -95,6 +121,56 @@ class SAMBCOptimization:
         # 计算未满足数量
         self.dfMain['未满足数量'] = self.dfMain['下单数量'] - self.dfMain['分货数量']
         pass
+
+    def OnlyD4And07Operations(self, dfGrouped, dfZCCRCutReason, row):
+        isOnlyD407Contained = PandasUtils.isOnlyD407Contained(dfZCCRCutReason)
+
+        hasNegativeQuantityForD4 = PandasUtils.HasNegativeQuantityForD4(dfZCCRCutReason)
+
+        isZeroSumD4And07 = PandasUtils.IsZeroSumD4And07(dfZCCRCutReason)
+
+        # reason code只包含D4和07
+        if isOnlyD407Contained:
+            # reason code为D4的Cut Quantity有小于0的记录
+            if hasNegativeQuantityForD4:
+                row['未满足原因代码'] = '01'
+            else:
+                row['未满足原因代码'] = '07'
+        # reason code不只包含D4和07
+        else:
+            if isZeroSumD4And07:
+                self.Contains04Operations(True, dfGrouped, dfZCCRCutReason, row)
+            else:
+                if hasNegativeQuantityForD4:
+                    row['未满足原因代码'] = '01'
+                else:
+                    row['未满足原因代码'] = '07'
+
+    def Contains04Operations(self, shouldRemoveSameAbsValue, dfGrouped, dfZCCRCutReason, row):
+        if shouldRemoveSameAbsValue:
+            # 删除有同样数量和同样reason code的正负值的记录
+            dfZCCRCutReasonRemoveValues = PandasUtils.DeleteDuplicatedAbsRows(dfGrouped)
+            # 相加reason code相同的'Cut Quantity'的正负值
+            dfZCCRCutReasonNew = PandasUtils.SumQtyForSameReasonCode(dfZCCRCutReasonRemoveValues)
+        else:
+            # 相加reason code相同的'Cut Quantity'的正负值
+            dfZCCRCutReasonNew = PandasUtils.SumQtyForSameReasonCode(dfZCCRCutReason)
+        # 判断‘Cut Quantity’ 绝对值的最大值是否唯一
+        isMaxAbsValueUnique, maxAbsValue = PandasUtils.IsMaxAbsValueUnique(dfZCCRCutReasonNew)
+
+        reasonCode = PandasUtils.FindReasonCodeForMaxAbsValue(maxAbsValue, dfZCCRCutReasonNew)
+
+        # 绝对值的最大值是唯一
+        if isMaxAbsValueUnique:
+            # reasonCode = PandasUtils.FindReasonCodeForMaxAbsValue(maxAbsValue, dfZCCRCutReasonNew)
+            if reasonCode == '01':
+                row['未满足原因代码'] = '01'
+            else:
+                row['未满足原因代码'] = '07'
+        # 绝对值的最大值不是是唯一
+        else:
+            # reasonCode = PandasUtils.FindReasonCodeForMaxAbsValue(maxAbsValue, dfZCCRCutReasonNew)
+            row['未满足原因代码'] = reasonCode
 
     def WriteZccrCutReasonToDfMain(self):
         if self.dfZCCR is None:
@@ -120,7 +196,6 @@ class SAMBCOptimization:
                 row['未满足原因代码'] = dfZCCRCutReason.at[0, 'Rsn. Code']
                 continue
 
-
             # ---------------------找到有多条记录Start---------------------#
 
             # 筛选出cut reason为59的记录
@@ -142,28 +217,132 @@ class SAMBCOptimization:
             # 两行不是01和58，有多行, 按reason code group by
             dfGrouped = dfZCCRCutReason.groupby('Rsn. Code')
 
-            for groupName, dfGroup in dfGrouped:
-                # 有同一个reason code有同样数量的正负值
-                if any((dfGroup['Cut Quantity'] > 0) & (dfGroup['Cut Quantity'].abs().duplicated())):
+            hasSamePositiveAndNegativeValueForOneReason = PandasUtils.HasSamePositiveAndNegativeValueForOneReason(
+                dfGrouped)
 
-                    # 判断dfZCCRCutReason是否包含reason code为D4的记录
+            isD4Contained = PandasUtils.ReasonCodeContainsD4(dfZCCRCutReason)
 
-                    pass
+            # isOnlyD407Contained = PandasUtils.isOnlyD407Contained(dfZCCRCutReason)
+            #
+            # hasNegativeQuantityForD4 = PandasUtils.HasNegativeQuantityForD4(dfZCCRCutReason)
+            #
+            # isZeroSumD4And07 = PandasUtils.IsZeroSumD4And07(dfZCCRCutReason)
+
+            # 同一个reason code有同样数量的正负值
+            if hasSamePositiveAndNegativeValueForOneReason:
+                # reason code是包含D4
+                if isD4Contained:
+                    self.OnlyD4And07Operations(dfGrouped, dfZCCRCutReason, row)
+
+                # reason code不包含D4
+                else:
+                    # reason code是否包含D4
+                    if isD4Contained:
+                        self.Contains04Operations(True, dfGrouped, dfZCCRCutReason, row)
+
+
+            # 同一个reason code有不同数量的正负值
+            else:
+                if isD4Contained:
+                    self.OnlyD4And07Operations(dfGrouped, dfZCCRCutReason, row)
+                else:
+                    self.Contains04Operations(False, dfGrouped, dfZCCRCutReason, row)
+
+            # for groupName, dfGroup in dfGrouped:
+            #     # 有同一个reason code有同样数量的正负值
+            #     if any((dfGroup['Cut Quantity'] > 0) & (dfGroup['Cut Quantity'].abs().duplicated())):
+            #
+            #         pass
+            #     # 不存在同一个reason code有同样数量的正负值
+            #     else:
+            #         pass
 
             # --------------不存在59 End--------------#
 
-
             # ---------------------找到有多条记录End---------------------#
 
-
-
-
-
-
     # ------------------------------ZCCR的操作End------------------------------#
+    def WriteVBAPToDfMain(self):
+        self.dfVBAP['VBELN'] = '0' + self.dfVBAP['VBELN']
+        self.dfVBAP['MATNR'] = '0000000000' + self.dfVBAP['MATNR']
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfVBAP, ['宝洁订单号', '宝洁产品代码'],
+                                            ['VBELN', 'MATNR'], ['客户产品代码'], ['KDMAT'])
+
+    def WriteLIPSToDfMain(self):
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfLIPS, ['交货号', '宝洁产品代码'],
+                                            ['DeliveryNo', 'MaterialNo'], ['软转换产品对应新码', '新码实际分货数量'],
+                                            ['NewMaterial', 'NewLFIMG'])
+        pass
+
+    def WriteOpenAllotmentToDfMain(self):
+        # 将日期列转换为 Pandas 的日期时间类型
+        self.dfOpenAllotment['操作日期(From)'] = pd.to_datetime(self.dfOpenAllotment['操作日期(From)'])
+        self.dfOpenAllotment['操作日期(To)'] = pd.to_datetime(self.dfOpenAllotment['操作日期(To)'])
+
+        dfOpenAllotmentTemp = self.dfOpenAllotment
+        dfMainTemp = self.dfMain
+
+        # 进行连接，根据条件设置 '促销装配额开放日缺货Y/N' 列的值为 'Y'
+        dfMerged = dfMainTemp.merge(dfOpenAllotmentTemp, left_on='宝洁产品代码', right_on='Item Code', how='left')
+
+        dfMerged['促销装配额开放日缺货Y/N'] = 'N'
+
+        condition = (dfMerged['未满足原因代码'] == '01') & (dfMerged['操作日期(From)'] <= pd.to_datetime('today')) & (
+                    dfMerged['操作日期(To)'] >= pd.to_datetime('today'))
+        dfMerged.loc[condition, '促销装配额开放日缺货Y/N'] = 'Y'
+
+        self.dfMain['促销装配额开放日缺货Y/N'] = dfMerged['促销装配额开放日缺货Y/N']
+
+    def AppedZeerToDfMain(self):
+        dfFiltered = self.dfZEER.loc[(self.dfZEER['Drops Err Message'].isin(self.zeerScreenConditionList)) & (
+                    self.dfZEER['Material Quantity'] != 0)]
+        
+        dfFiltered = PandasUtils.DeleteColumns(dfFiltered, self.zeerReservedColumnsList)
+
+        dfFiltered.rename(columns=self.zeerReservedColumns, inplace=True)
+
+        dfFiltered = PandasUtils.AppendColumnsToDf(dfFiltered, self.finalReportFieldList, dfFiltered.columns.to_list())
+
+        self.dfMain = pd.concat([self.dfMain, dfFiltered])
+
+        self.dfMain.reset_index(drop=True, inplace=True)
+
+    def WriteCustomerListToDfMain(self):
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
+                                            ['付运点代码'],
+                                            ['SAP Ship-to Code'],
+                                            ['渠道', '区域', '市场', '客户简称'],
+                                            ['Channel', 'Division', 'Market', 'Banner/RD Name'])
+        pass
+
+    def WritePriceListToDfMain(self):
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
+                                            ['宝洁产品代码'],
+                                            ['代码'],
+                                            ['品类',	'包装/箱', '不含税价格', 'MSU/箱', '产品条行码'],
+                                            ['品类',	'箱规', '200箱不含税价', 'MSU/sale unit', '产品条码'])
+
+    def FillInDfMain(self):
+
+        self.dfMain['订单类型'] = '非提前订单'
+
+        self.dfMain.loc[self.dfMain['AO类型'] != ''] = '提前订单'
+
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
+                                            ['未满足原因代码'],
+                                            ['Cut Reason'],
+                                            ['未满足原因代码', '未满足原因中文描述'],
+                                            ['砍单原因', '未满足单品补货指引'])
+
+        self.dfMain['下单数量MSU'] = pd.to_numeric(self.dfMain['MSU/sale unit']) * pd.to_numeric(self.dfMain['下单数量'])
+
+        self.dfMain['有效下单数量 MSU'] = pd.to_numeric(self.dfMain['MSU/sale unit']) * pd.to_numeric(self.dfMain['有效下单数量'])
+
+        self.dfMain['分货数量 MSU'] = pd.to_numeric(self.dfMain['MSU/sale unit']) * pd.to_numeric(self.dfMain['分货数量'])
+
+        self.dfMain['未满足数量MSU'] = pd.to_numeric(self.dfMain['下单数量MSU']) - pd.to_numeric(self.dfMain['分货数量 MSU'])
 
     def Main(self):
-        # filePath = r'C:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\Input Files\ZDER.xlsx'
         # timeStart = time.time()
         # df = pd.read_excel(filePath, sheet_name="Sheet1", dtype='str')
         # print("读数据的时间为%ss"%(time.time() - timeStart))
@@ -171,6 +350,13 @@ class SAMBCOptimization:
         self.AppendDfZderToDfMain()
         self.InsertZocrOrderValueToDfMain()
         self.WriteZccrCutReasonToDfMain()
+        self.WriteVBAPToDfMain()
+        self.WriteLIPSToDfMain()
+        self.WriteOpenAllotmentToDfMain()
+        self.AppedZeerToDfMain()
+        self.WriteCustomerListToDfMain()
+        self.WritePriceListToDfMain()
+        self.FillInDfMain()
         pass
         # print(df)
 
