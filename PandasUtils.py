@@ -57,11 +57,13 @@ class PandasUtils:
         # dfMerged['分货号码'] = dfMerged['delivery number'].fillna(dfMerged['分货号码'])
         # dfMain['下单数量'] = dfMerged['下单数量']
         # dfMain['分货号码'] = dfMerged['分货号码']
+        return dfMain
 
     @staticmethod
     def HasSamePositiveAndNegativeValueForOneReason(dfGrouped):
         hasSamePositiveAndNegativeValue = False
         for groupName, dfGroup in dfGrouped:
+            dfGroup['Cut Quantity'] = pd.to_numeric(dfGroup['Cut Quantity'])
             if any((dfGroup['Cut Quantity'] > 0) & (dfGroup['Cut Quantity'].abs().duplicated())):
                 hasSamePositiveAndNegativeValue = True
                 break
@@ -142,6 +144,7 @@ class PandasUtils:
     @staticmethod
     def IsMaxAbsValueUnique(dfZCCRCutReason):
         # 获取'Cut Quantity'列的绝对值
+        dfZCCRCutReason['Cut Quantity'] = pd.to_numeric(dfZCCRCutReason['Cut Quantity'])
         absCutQuantity = dfZCCRCutReason['Cut Quantity'].abs()
 
         # 找到绝对值的最大值
@@ -156,6 +159,7 @@ class PandasUtils:
 
     @staticmethod
     def FindReasonCodeForMaxAbsValue(maxAbsValue, df):
+        df['Cut Quantity'] = pd.to_numeric(df['Cut Quantity'])
         df = df.loc[df['Cut Quantity'].abs() == maxAbsValue]
         df.reset_index(drop=True, inplace=True)
         numRows = df.shape[0]

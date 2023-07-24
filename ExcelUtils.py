@@ -1,4 +1,4 @@
-import win32com.client as win32
+# import win32com.client as win32
 import os
 
 
@@ -24,8 +24,6 @@ class ExcelUtils:
             self.app.Quit()
         except:
             self.app.Quit()
-
-
 
 
 if __name__ == '__main__':
