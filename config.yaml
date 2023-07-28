@@ -42,6 +42,14 @@ zeerScreenConditionList:
   - Material not Active
   - Error2
 
+
+# Price Braket 的值要修改为右边的值
+priceBraket:
+  S05: S05--200CS
+  S06: S06--800CS for normal/ 400CS for Water Tap
+  S07: S07--2000CS
+  S08: S08--3500CS
+
 # 最终报表field list
 finalReportFieldList:
   - 渠道
