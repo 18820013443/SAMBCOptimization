@@ -25,6 +25,7 @@ class SAMBCOptimization:
         self.zeerScreenConditionList = self.settings['zeerScreenConditionList']
         self.zeerReservedColumns = self.settings['zeerReservedColumns']
         self.zeerReservedColumnsList = self.zeerReservedColumns.keys()
+        self.priceBraket = self.settings['priceBraket']
         pass
 
     def ReadFilesToDataFrame(self):
@@ -46,7 +47,7 @@ class SAMBCOptimization:
         self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'VBAK')
 
         # 读取dfVBAP
-        self.dfVBAP = PandasUtils.GetDataFrame(self.mainFolder, 'VBAP.xlsx', 'VBAP')
+        self.dfVBAP = PandasUtils.GetDataFrame(self.mainFolder, 'VBAP.csv', 'VBAP')
 
         # 读取dfLIPS
         self.dfLIPS = PandasUtils.GetDataFrame(self.mainFolder, 'LIPS.xlsx', 'Sheet1')
@@ -94,6 +95,10 @@ class SAMBCOptimization:
         self.SortDfZderFieldsByFinalReportFields()
         # self.dfMain = self.dfMain.fillna(self.dfZDER)
         self.dfMain = pd.concat([self.dfMain, self.dfZDER])
+
+        # 修改Price Braket
+        for key in self.priceBraket.keys():
+            self.dfMain['固定箱数折扣'].loc[self.dfMain['固定箱数折扣'] == key] = self.priceBraket[key]
         print(self.dfMain)
 
     # ------------------------------ZDER的操作End------------------------------#
@@ -104,8 +109,11 @@ class SAMBCOptimization:
         self.dfZOCR['Material No.'] = '0000000000' + self.dfZOCR['Material No.']
         # self.dfZOCR = self.dfZOCR.dropna(subset=['Material No.'])
 
-        self.dfMain = PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfZOCR, ['宝洁订单号', '宝洁产品代码'],
-                                            ['Sales Order No.', 'Material No.'], ['下单数量'], ['Order Value'])
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfZOCR,
+                                            ['宝洁订单号', '宝洁产品代码'],
+                                            ['Sales Order No.', 'Material No.'],
+                                            ['分货金额含税（供参考，发票为准）'],
+                                            ['Order Value'])
 
     # ------------------------------ZOCR的操作End------------------------------#
 
@@ -210,6 +218,7 @@ class SAMBCOptimization:
             if dfZCCRCutReason.shape[0] == 1:
                 # row['未满足原因代码'] = dfZCCRCutReason.at[0, 'Rsn. Code']
                 row['未满足原因代码'] = dfZCCRCutReason.iloc[0]['Rsn. Code']
+                dfUnsatisfiedQty.iloc[index] = row
                 continue
 
             # ---------------------找到有多条记录Start---------------------#
@@ -220,6 +229,7 @@ class SAMBCOptimization:
             # 如果存在59的记录，则赋值59，继续下一条
             if dfCutReason59.shape[0] > 0:
                 row['未满足原因代码'] = '59'
+                dfUnsatisfiedQty.iloc[index] = row
                 continue
 
             # --------------不存在59 Start--------------#
@@ -270,7 +280,7 @@ class SAMBCOptimization:
             # ---------------------找到有多条记录End---------------------#
 
         # 将dfUnsatisfiedQty中的cutReason回写到self.dfMain中
-        self.dfMain = PandasUtils.UpdateDfMainFromDfOther(self.dfMain, dfUnsatisfiedQty,
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, dfUnsatisfiedQty,
                                             ['宝洁订单号', '宝洁产品代码'],
                                             ['宝洁订单号', '宝洁产品代码'],
                                             ['未满足原因代码'],
@@ -279,8 +289,11 @@ class SAMBCOptimization:
     # ------------------------------ZCCR的操作End------------------------------#
 
     def WriteVBAKToDfMain(self):
-        self.dfVBAK['VBELN'] = '0' + self.dfVBAP['VBELN']
-        self.dfMain = PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfVBAK,
+        if self.dfVBAK is None:
+            return
+
+        self.dfVBAK['VBELN'] = '0' + self.dfVBAK['VBELN']
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfVBAK,
                                             ['宝洁订单号'],
                                             ['VBELN'],
                                             ['订单生成日'],
@@ -288,14 +301,27 @@ class SAMBCOptimization:
                                             )
 
     def WriteVBAPToDfMain(self):
-        self.dfVBAP['VBELN'] = '0' + self.dfVBAP['VBELN']
-        self.dfVBAP['MATNR'] = '0000000000' + self.dfVBAP['MATNR']
-        self.dfMain = PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfVBAP, ['宝洁订单号', '宝洁产品代码'],
-                                            ['VBELN', 'MATNR'], ['客户产品代码'], ['KDMAT'])
+        if self.dfVBAP is None:
+            return
+
+        # self.dfVBAP['VBELN'] = '0' + self.dfVBAP['VBELN']
+        # self.dfVBAP['MATNR'] = '0000000000' + self.dfVBAP['MATNR']
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfVBAP,
+                                            ['宝洁订单号', '宝洁产品代码'],
+                                            ['VBELN', 'MATNR'],
+                                            ['客户产品代码'],
+                                            ['KDMAT'])
 
     def WriteLIPSToDfMain(self):
-        self.dfMain = PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfLIPS, ['交货号', '宝洁产品代码'],
-                                            ['DeliveryNo', 'MaterialNo'], ['软转换产品对应新码', '新码实际分货数量'],
+        if self.dfLIPS is None:
+            return
+
+        dfLIPSNotNull = self.dfLIPS.loc[self.dfLIPS['NewLFIMG'].notnull()]
+
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, dfLIPSNotNull,
+                                            ['交货号', '宝洁产品代码'],
+                                            ['DeliveryNo', 'MaterialNo'],
+                                            ['软转换产品对应新码', '新码实际分货数量'],
                                             ['NewMaterial', 'NewLFIMG'])
         pass
 
@@ -341,22 +367,29 @@ class SAMBCOptimization:
         pass
 
     def WritePriceListToDfMain(self):
-        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
+        if self.dfPriceList is None:
+            return
+
+        # self.dfPriceList['代码'] = '0' + self.dfPriceList['代码']
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfPriceList,
                                             ['宝洁产品代码'],
-                                            ['代码'],
-                                            ['品类', '包装/箱', '不含税价格', 'MSU/箱', '产品条行码'],
-                                            ['品类', '箱规', '200箱不含税价', 'MSU/sale unit', '产品条码'])
+                                            ['Material'],
+                                            ['品类', '箱规', '200箱不含税价', 'MSU/sale unit', '产品条码'],
+                                            ['品类', '包装/箱', '不含税价格', 'MSU/箱', '产品条行码'])
 
     def FillInDfMain(self):
 
         self.dfMain['订单类型'] = '非提前订单'
 
-        self.dfMain.loc[self.dfMain['AO类型'] != ''] = '提前订单'
+        # self.dfMain['订单类型'].loc[self.dfMain['AO类型'] != ''] = '提前订单'
+        self.dfMain.loc[self.dfMain['AO类型'].notnull(), '订单类型'] = '提前订单'
 
-        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
+        # self.dfMain.loc[self.dfMain['AO类型'] != '']['订单类型'] = '提前订单'
+
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCutReasonList,
                                             ['未满足原因代码'],
                                             ['Cut Reason'],
-                                            ['未满足原因代码', '未满足原因中文描述'],
+                                            ['未满足原因中文描述', '未满足单品补货指引'],
                                             ['砍单原因', '未满足单品补货指引'])
 
         self.dfMain['下单数量MSU'] = pd.to_numeric(self.dfMain['MSU/sale unit']) * pd.to_numeric(
@@ -388,6 +421,7 @@ class SAMBCOptimization:
         self.WriteCustomerListToDfMain()
         self.WritePriceListToDfMain()
         self.FillInDfMain()
+        self.dfMain.to_excel('output.xlsx')
         pass
         # print(df)
 

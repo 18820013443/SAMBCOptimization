@@ -10,10 +10,19 @@ class PandasUtils:
 
     @staticmethod
     def GetDataFrame(folder, fileName, sheetName):
+        df = None
         filePath = os.path.join(folder, fileName)
+        fileName, extension = os.path.splitext(os.path.basename(filePath))
         if not os.path.exists(filePath):
             return None
-        df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str')
+
+        if '.xls' in extension:
+            df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str')
+        elif '.csv' in extension:
+            df = pd.read_csv(filePath, dtype='str')
+        else:
+            raise Exception('The file name is not like .xlsx, .xls, or .csv, please make sure the file name is correct!')
+
         df.dropna(axis=0, how='all', inplace=True)
         return df
 
@@ -47,17 +56,21 @@ class PandasUtils:
 
     @staticmethod
     # 将dfOther中的几列数据跟新到dfMain中
-    def UpdateDfMainFromDfOther(dfMain, dfOther, leftConditionColumnList, rightConditionColumnList, leftUpdateColumnList, rightUpdateColumnList):
-        dfMerged = pd.merge(dfMain, dfOther, left_on=leftConditionColumnList, right_on=rightConditionColumnList, how='left')
+    def UpdateDfMainFromDfOther(dfMain, dfOther, leftConditionColumnList, rightConditionColumnList, leftUpdateColumnList, rightUpdateColumnList, ):
+        dfMerged = pd.merge(dfMain, dfOther, left_on=leftConditionColumnList, right_on=rightConditionColumnList, how='left', suffixes=('', '_x'))
 
-        for i in range(len(leftUpdateColumnList) - 1):
-            dfMerged[leftUpdateColumnList(i)] = dfMerged[rightUpdateColumnList(i)].fillna(dfMerged[leftUpdateColumnList(i)])
-            dfMain[leftUpdateColumnList(i)] = dfMerged[leftUpdateColumnList(i)]
+        for i in range(0, len(leftUpdateColumnList)):
+            if leftUpdateColumnList[i] != rightUpdateColumnList[i]:
+                dfMerged[leftUpdateColumnList[i]] = dfMerged[rightUpdateColumnList[i]].fillna(dfMerged[leftUpdateColumnList[i]])
+            else:
+                dfMerged[leftUpdateColumnList[i]] = dfMerged[rightUpdateColumnList[i] + '_x'].fillna(
+                    dfMerged[leftUpdateColumnList[i]])
+            dfMain[leftUpdateColumnList[i]] = dfMerged[leftUpdateColumnList[i]]
         # dfMerged['下单数量'] = dfMerged['Order Value'].fillna(dfMerged['下单数量'])
         # dfMerged['分货号码'] = dfMerged['delivery number'].fillna(dfMerged['分货号码'])
         # dfMain['下单数量'] = dfMerged['下单数量']
         # dfMain['分货号码'] = dfMerged['分货号码']
-        return dfMain
+        # return dfMain
 
     @staticmethod
     def HasSamePositiveAndNegativeValueForOneReason(dfGrouped):
