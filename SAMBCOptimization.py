@@ -483,7 +483,7 @@ class SAMBCOptimization:
             self.FormatDfMain()
             self.logger.info('Format dfMain')
 
-            self.dfMain.to_excel('output.xlsx')
+            self.dfMain.to_excel('output.xlsx', index=False)
             self.logger.info('Write report to excel')
 
         except Exception as e:
