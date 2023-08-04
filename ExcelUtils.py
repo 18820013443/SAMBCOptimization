@@ -1,6 +1,5 @@
-# import win32com.client as win32
+import win32com.client as win32
 import os
-import sys
 import traceback
 
 import pandas as pd
@@ -30,14 +29,14 @@ class ExcelUtils:
             strE = traceback.format_exc()
             raise Exception(strE)
 
-    def ReadXlsToDf(self, filePath):
+    def ReadXlsToDf(self, filePath, sheetName):
         try:
             fileName, extension = os.path.splitext(os.path.basename(filePath))
             fileName = '%s.xlsx' % fileName
             dirName = os.path.dirname(filePath)
             newFilePath = os.path.join(dirName, fileName)
             wk = self.app.Workbooks.Open(filePath, False, False)
-            wk.UsedRange.Copy()
+            wk.Sheet(sheetName).UsedRange.Copy()
             wk.Close()
             self.app.Quit()
             df = pd.read_clipboard()
