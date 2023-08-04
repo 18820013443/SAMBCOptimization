@@ -1,0 +1,101 @@
+[08/04/2023 03:57:55 PM INFO]:Files have been read to dataframe
+[08/04/2023 03:57:55 PM INFO]:Append ZDER to dfMain
+[08/04/2023 03:57:56 PM INFO]:Insert ZOCR to dfMain
+[08/04/2023 03:59:58 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/04/2023 03:59:58 PM INFO]:Delete D8
+[08/04/2023 03:59:58 PM INFO]:Write VBAK to dfMain
+[08/04/2023 03:59:59 PM INFO]:Write VBAP to dfMain
+[08/04/2023 03:59:59 PM INFO]:Write LIPS to dfMain
+[08/04/2023 03:59:59 PM DEBUG]:Traceback (most recent call last):
+  File "/Users/kaitang/Code-Projects/SAMBCOptimization/SAMBCOptimization.py", line 462, in Main
+    self.logger('Write Open Allotment to dfMain')
+TypeError: 'Logger' object is not callable
+
+[08/04/2023 04:01:12 PM INFO]:Files have been read to dataframe
+[08/04/2023 04:01:12 PM INFO]:Append ZDER to dfMain
+[08/04/2023 04:01:13 PM INFO]:Insert ZOCR to dfMain
+[08/04/2023 04:03:16 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/04/2023 04:03:16 PM INFO]:Delete D8
+[08/04/2023 04:03:16 PM INFO]:Write VBAK to dfMain
+[08/04/2023 04:03:16 PM INFO]:Write VBAP to dfMain
+[08/04/2023 04:03:16 PM INFO]:Write LIPS to dfMain
+[08/04/2023 04:03:16 PM INFO]:Write Open Allotment to dfMain
+[08/04/2023 04:03:17 PM INFO]:Append ZEER to dfMain
+[08/04/2023 04:03:17 PM INFO]:Write Customer List to dfMain
+[08/04/2023 04:03:17 PM INFO]:Write Price List to dfMain
+[08/04/2023 04:03:17 PM INFO]:Fill in dfMain
+[08/04/2023 04:07:27 PM INFO]:Files have been read to dataframe
+[08/04/2023 04:07:27 PM INFO]:Append ZDER to dfMain
+[08/04/2023 04:07:28 PM INFO]:Insert ZOCR to dfMain
+[08/04/2023 04:09:29 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/04/2023 04:09:30 PM INFO]:Delete D8
+[08/04/2023 04:09:30 PM INFO]:Write VBAK to dfMain
+[08/04/2023 04:09:30 PM INFO]:Write VBAP to dfMain
+[08/04/2023 04:09:30 PM INFO]:Write LIPS to dfMain
+[08/04/2023 04:09:30 PM INFO]:Write Open Allotment to dfMain
+[08/04/2023 04:09:30 PM INFO]:Append ZEER to dfMain
+[08/04/2023 04:09:30 PM INFO]:Write Customer List to dfMain
+[08/04/2023 04:09:30 PM INFO]:Write Price List to dfMain
+[08/04/2023 04:09:30 PM INFO]:Fill in dfMain
+[08/04/2023 04:49:52 PM INFO]:Files have been read to dataframe
+[08/04/2023 04:49:52 PM INFO]:Append ZDER to dfMain
+[08/04/2023 04:49:52 PM INFO]:Insert ZOCR to dfMain
+[08/04/2023 04:51:08 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/04/2023 04:51:08 PM INFO]:Delete D8
+[08/04/2023 04:51:08 PM INFO]:Write VBAK to dfMain
+[08/04/2023 04:51:08 PM INFO]:Write VBAP to dfMain
+[08/04/2023 04:51:08 PM INFO]:Write LIPS to dfMain
+[08/04/2023 04:51:08 PM INFO]:Write Open Allotment to dfMain
+[08/04/2023 04:51:08 PM INFO]:Append ZEER to dfMain
+[08/04/2023 04:51:08 PM INFO]:Write Customer List to dfMain
+[08/04/2023 04:51:08 PM INFO]:Write Price List to dfMain
+[08/04/2023 04:51:08 PM INFO]:Fill in dfMain
+[08/04/2023 04:51:08 PM INFO]:Format dfMain
+[08/04/2023 04:51:19 PM INFO]:Write report to excel
+[08/04/2023 04:58:53 PM INFO]:Files have been read to dataframe
+[08/04/2023 04:58:53 PM INFO]:Append ZDER to dfMain
+[08/04/2023 04:58:53 PM INFO]:Insert ZOCR to dfMain
+[08/04/2023 05:00:09 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/04/2023 05:00:09 PM INFO]:Delete D8
+[08/04/2023 05:00:09 PM INFO]:Write VBAK to dfMain
+[08/04/2023 05:00:09 PM INFO]:Write VBAP to dfMain
+[08/04/2023 05:00:09 PM INFO]:Write LIPS to dfMain
+[08/04/2023 05:00:09 PM INFO]:Write Open Allotment to dfMain
+[08/04/2023 05:00:09 PM INFO]:Append ZEER to dfMain
+[08/04/2023 05:00:09 PM INFO]:Write Customer List to dfMain
+[08/04/2023 05:00:09 PM INFO]:Write Price List to dfMain
+[08/04/2023 05:00:09 PM INFO]:Fill in dfMain
+[08/04/2023 05:00:09 PM INFO]:Format dfMain
+[08/04/2023 05:00:19 PM INFO]:Write report to excel
+[08/04/2023 05:02:44 PM INFO]:Start
+[08/04/2023 05:02:57 PM INFO]:Files have been read to dataframe
+[08/04/2023 05:02:57 PM INFO]:Append ZDER to dfMain
+[08/04/2023 05:02:58 PM INFO]:Insert ZOCR to dfMain
+[08/04/2023 05:04:16 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/04/2023 05:04:16 PM INFO]:Delete D8
+[08/04/2023 05:04:16 PM INFO]:Write VBAK to dfMain
+[08/04/2023 05:04:16 PM INFO]:Write VBAP to dfMain
+[08/04/2023 05:04:16 PM INFO]:Write LIPS to dfMain
+[08/04/2023 05:04:16 PM INFO]:Write Open Allotment to dfMain
+[08/04/2023 05:04:16 PM INFO]:Append ZEER to dfMain
+[08/04/2023 05:04:16 PM INFO]:Write Customer List to dfMain
+[08/04/2023 05:04:16 PM INFO]:Write Price List to dfMain
+[08/04/2023 05:04:16 PM INFO]:Fill in dfMain
+[08/04/2023 05:04:16 PM INFO]:Format dfMain
+[08/04/2023 05:04:27 PM INFO]:Write report to excel
+[08/04/2023 05:12:02 PM INFO]:Start
+[08/04/2023 05:12:15 PM INFO]:Files have been read to dataframe
+[08/04/2023 05:12:15 PM INFO]:Append ZDER to dfMain
+[08/04/2023 05:12:16 PM INFO]:Insert ZOCR to dfMain
+[08/04/2023 05:13:31 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/04/2023 05:13:31 PM INFO]:Delete D8
+[08/04/2023 05:13:31 PM INFO]:Write VBAK to dfMain
+[08/04/2023 05:13:31 PM INFO]:Write VBAP to dfMain
+[08/04/2023 05:13:32 PM INFO]:Write LIPS to dfMain
+[08/04/2023 05:13:32 PM INFO]:Write Open Allotment to dfMain
+[08/04/2023 05:13:32 PM INFO]:Append ZEER to dfMain
+[08/04/2023 05:13:32 PM INFO]:Write Customer List to dfMain
+[08/04/2023 05:13:32 PM INFO]:Write Price List to dfMain
+[08/04/2023 05:13:32 PM INFO]:Fill in dfMain
+[08/04/2023 05:13:32 PM INFO]:Format dfMain
+[08/04/2023 05:13:42 PM INFO]:Write report to excel

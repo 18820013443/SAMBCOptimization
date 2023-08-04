@@ -1,6 +1,7 @@
 import logging
 
-class Log():
+
+class Log:
     def __init__(self, level='DEBUG'):
         self.log = logging.getLogger('KK')
         self.log.setLevel(level)

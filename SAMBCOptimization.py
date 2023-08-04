@@ -1,9 +1,13 @@
+import sys
+
 import numpy as np
 import pandas as pd
 import time
 import os
 from YamlHandler import YamlHandler
 from PandasUtils import PandasUtils
+from Log import Log
+import traceback
 from ExcelUtils import ExcelUtils
 
 
@@ -11,6 +15,8 @@ class SAMBCOptimization:
     def __init__(self) -> None:
         self.Initialize()
         self.dfMain = None
+        log = Log()
+        self.logger = log.GetLog()
 
         self.mainFolder = '%s/Input Files' % os.getcwd() if self.isTestMode else os.getcwd()
 
@@ -99,7 +105,7 @@ class SAMBCOptimization:
         # 修改Price Braket
         for key in self.priceBraket.keys():
             self.dfMain['固定箱数折扣'].loc[self.dfMain['固定箱数折扣'] == key] = self.priceBraket[key]
-        print(self.dfMain)
+        # print(self.dfMain)
 
     # ------------------------------ZDER的操作End------------------------------#
 
@@ -206,74 +212,80 @@ class SAMBCOptimization:
         dfUnsatisfiedQty.drop_duplicates(subset=['宝洁订单号', '宝洁产品代码'], keep='first')
 
         for index, row in dfUnsatisfiedQty.iterrows():
-            strSalesOrder = row['宝洁订单号'].lstrip('0')
-            strMaterial = row['宝洁产品代码'].lstrip('0')
-            dfZCCRCutReason = self.dfZCCR.loc[
-                (self.dfZCCR['Sales Order'] == strSalesOrder) & (self.dfZCCR['Material'] == strMaterial)]
-            # print(dfZCCRCutReason.shape[0])
-            # 没有找到记录，继续下一条
-            if dfZCCRCutReason.shape[0] == 0:
-                continue
-            # 找到只有一条记录，赋值，继续下一条
-            if dfZCCRCutReason.shape[0] == 1:
-                # row['未满足原因代码'] = dfZCCRCutReason.at[0, 'Rsn. Code']
-                row['未满足原因代码'] = dfZCCRCutReason.iloc[0]['Rsn. Code']
-                dfUnsatisfiedQty.iloc[index] = row
-                continue
-
-            # ---------------------找到有多条记录Start---------------------#
-
-            # 筛选出cut reason为59的记录
-            dfCutReason59 = dfZCCRCutReason.loc[dfZCCRCutReason['Rsn. Code'] == '59']
-
-            # 如果存在59的记录，则赋值59，继续下一条
-            if dfCutReason59.shape[0] > 0:
-                row['未满足原因代码'] = '59'
-                dfUnsatisfiedQty.iloc[index] = row
-                continue
-
-            # --------------不存在59 Start--------------#
-
-            # 如果cut reason只有两行
-            if dfZCCRCutReason.shape[0] == 2:
-                # 两行分别是01和58, 则赋值58，继续下一条
-                if '01' in dfZCCRCutReason['Rsn. Code'].values and '58' in dfZCCRCutReason['Rsn. Code'].values:
-                    row['未满足原因代码'] = '58'
+            try:
+                strSalesOrder = row['宝洁订单号'].lstrip('0')
+                strMaterial = row['宝洁产品代码'].lstrip('0')
+                dfZCCRCutReason = self.dfZCCR.loc[
+                    (self.dfZCCR['Sales Order'] == strSalesOrder) & (self.dfZCCR['Material'] == strMaterial)]
+                # print(dfZCCRCutReason.shape[0])
+                # 没有找到记录，继续下一条
+                if dfZCCRCutReason.shape[0] == 0:
                     continue
-            # 两行不是01和58，有多行, 按reason code group by
-            dfGrouped = dfZCCRCutReason.groupby('Rsn. Code')
+                # 找到只有一条记录，赋值，继续下一条
+                if dfZCCRCutReason.shape[0] == 1:
+                    # row['未满足原因代码'] = dfZCCRCutReason.at[0, 'Rsn. Code']
+                    row['未满足原因代码'] = dfZCCRCutReason.iloc[0]['Rsn. Code']
+                    dfUnsatisfiedQty.iloc[index] = row
+                    continue
 
-            hasSamePositiveAndNegativeValueForOneReason = PandasUtils.HasSamePositiveAndNegativeValueForOneReason(
-                dfGrouped)
+                # ---------------------找到有多条记录Start---------------------#
 
-            isD4Contained = PandasUtils.ReasonCodeContainsD4(dfZCCRCutReason)
+                # 筛选出cut reason为59的记录
+                dfCutReason59 = dfZCCRCutReason.loc[dfZCCRCutReason['Rsn. Code'] == '59']
 
-            # isOnlyD407Contained = PandasUtils.isOnlyD407Contained(dfZCCRCutReason)
-            #
-            # hasNegativeQuantityForD4 = PandasUtils.HasNegativeQuantityForD4(dfZCCRCutReason)
-            #
-            # isZeroSumD4And07 = PandasUtils.IsZeroSumD4And07(dfZCCRCutReason)
+                # 如果存在59的记录，则赋值59，继续下一条
+                if dfCutReason59.shape[0] > 0:
+                    row['未满足原因代码'] = '59'
+                    dfUnsatisfiedQty.iloc[index] = row
+                    continue
 
-            # 同一个reason code有同样数量的正负值
-            if hasSamePositiveAndNegativeValueForOneReason:
-                # reason code是包含D4
-                if isD4Contained:
-                    self.OnlyD4And07Operations(dfGrouped, dfZCCRCutReason, row)
+                # --------------不存在59 Start--------------#
 
-                # reason code不包含D4
+                # 如果cut reason只有两行
+                if dfZCCRCutReason.shape[0] == 2:
+                    # 两行分别是01和58, 则赋值58，继续下一条
+                    if '01' in dfZCCRCutReason['Rsn. Code'].values and '58' in dfZCCRCutReason['Rsn. Code'].values:
+                        row['未满足原因代码'] = '58'
+                        continue
+                # 两行不是01和58，有多行, 按reason code group by
+                dfGrouped = dfZCCRCutReason.groupby('Rsn. Code')
+
+                hasSamePositiveAndNegativeValueForOneReason = PandasUtils.HasSamePositiveAndNegativeValueForOneReason(
+                    dfGrouped)
+
+                isD4Contained = PandasUtils.ReasonCodeContainsD4(dfZCCRCutReason)
+
+                # isOnlyD407Contained = PandasUtils.isOnlyD407Contained(dfZCCRCutReason)
+                #
+                # hasNegativeQuantityForD4 = PandasUtils.HasNegativeQuantityForD4(dfZCCRCutReason)
+                #
+                # isZeroSumD4And07 = PandasUtils.IsZeroSumD4And07(dfZCCRCutReason)
+
+                # 同一个reason code有同样数量的正负值
+                if hasSamePositiveAndNegativeValueForOneReason:
+                    # reason code是包含D4
+                    if isD4Contained:
+                        self.OnlyD4And07Operations(dfGrouped, dfZCCRCutReason, row)
+
+                    # reason code不包含D4
+                    else:
+                        # reason code是否包含D4
+                        # if isD4Contained:
+                        self.Contains04Operations(True, dfGrouped, dfZCCRCutReason, row)
+
+                # 同一个reason code有不同数量的正负值
                 else:
-                    # reason code是否包含D4
-                    # if isD4Contained:
-                    self.Contains04Operations(True, dfGrouped, dfZCCRCutReason, row)
+                    if isD4Contained:
+                        self.OnlyD4And07Operations(dfGrouped, dfZCCRCutReason, row)
+                    else:
+                        self.Contains04Operations(False, dfGrouped, dfZCCRCutReason, row)
 
-            # 同一个reason code有不同数量的正负值
-            else:
-                if isD4Contained:
-                    self.OnlyD4And07Operations(dfGrouped, dfZCCRCutReason, row)
-                else:
-                    self.Contains04Operations(False, dfGrouped, dfZCCRCutReason, row)
-
-            dfUnsatisfiedQty.iloc[index] = row
+                dfUnsatisfiedQty.iloc[index] = row
+            except Exception as e:
+                rowData = row.to_json(indent=2, force_ascii=False)
+                strE = traceback.format_exc()
+                self.logger.debug('Write ZCCR Cut Reason Error and the row data is \n: %s' % rowData)
+                raise Exception(e)
 
                     # --------------不存在59 End--------------#
 
@@ -404,24 +416,80 @@ class SAMBCOptimization:
         self.dfMain['未满足数量MSU'] = pd.to_numeric(self.dfMain['下单数量MSU']) - pd.to_numeric(
             self.dfMain['分货数量 MSU'])
 
+    def FormatDfMain(self):
+        # 订单生成日，分货日，到货日的格式改为yyyy/MM/dd
+        self.dfMain['订单生成日'] = self.dfMain['订单生成日'].str.slice(0, 10).str.replace('-', '/')
+        self.dfMain['分货日'] = self.dfMain['分货日'].str.slice(0, 10).str.replace('-', '/')
+        self.dfMain['到货日'] = self.dfMain['到货日'].str.slice(0, 10).str.replace('-', '/')
+
+        # 宝洁订单号去除前置0
+        self.dfMain['宝洁订单号'] = self.dfMain['宝洁订单号'].str.lstrip('0')
+
+        # 宝洁产品代码去除前置0
+        self.dfMain['宝洁产品代码'] = self.dfMain['宝洁产品代码'].str.lstrip('0')
+
+        # 交货号去除前置0
+        self.dfMain['交货号'] = self.dfMain['交货号'].str.lstrip('0')
+
+        # 软转换产品对应新码去除前置0
+        self.dfMain['软转换产品对应新码'] = self.dfMain['软转换产品对应新码'].str.lstrip('0')
+
+        pass
+
     def Main(self):
         # df = pd.read_excel(filePath, sheet_name="Sheet1", dtype='str')
         # print("读数据的时间为%ss"%(time.time() - timeStart))
+        self.logger.info('Start')
+        try:
+            self.ReadFilesToDataFrame()
+            self.logger.info('Files have been read to dataframe')
 
-        self.ReadFilesToDataFrame()
-        self.AppendDfZderToDfMain()
-        self.InsertZocrOrderValueToDfMain()
-        self.WriteZccrCutReasonToDfMain()
-        self.DfMainDeleteD8Records()
-        self.WriteVBAKToDfMain()
-        self.WriteVBAPToDfMain()
-        self.WriteLIPSToDfMain()
-        self.WriteOpenAllotmentToDfMain()
-        self.AppedZeerToDfMain()
-        self.WriteCustomerListToDfMain()
-        self.WritePriceListToDfMain()
-        self.FillInDfMain()
-        self.dfMain.to_excel('output.xlsx')
+            self.AppendDfZderToDfMain()
+            self.logger.info('Append ZDER to dfMain')
+
+            self.InsertZocrOrderValueToDfMain()
+            self.logger.info('Insert ZOCR to dfMain')
+
+            self.WriteZccrCutReasonToDfMain()
+            self.logger.info('Write ZCCR Cut Reason to dfMain')
+
+            self.DfMainDeleteD8Records()
+            self.logger.info('Delete D8')
+
+            self.WriteVBAKToDfMain()
+            self.logger.info('Write VBAK to dfMain')
+
+            self.WriteVBAPToDfMain()
+            self.logger.info('Write VBAP to dfMain')
+
+            self.WriteLIPSToDfMain()
+            self.logger.info('Write LIPS to dfMain')
+
+            self.WriteOpenAllotmentToDfMain()
+            self.logger.info('Write Open Allotment to dfMain')
+
+            self.AppedZeerToDfMain()
+            self.logger.info('Append ZEER to dfMain')
+
+            self.WriteCustomerListToDfMain()
+            self.logger.info('Write Customer List to dfMain')
+
+            self.WritePriceListToDfMain()
+            self.logger.info('Write Price List to dfMain')
+
+            self.FillInDfMain()
+            self.logger.info('Fill in dfMain')
+
+            self.FormatDfMain()
+            self.logger.info('Format dfMain')
+
+            self.dfMain.to_excel('output.xlsx')
+            self.logger.info('Write report to excel')
+
+        except Exception as e:
+            strE = traceback.format_exc()
+            self.logger.debug(strE)
+            sys.exit(1)
         pass
         # print(df)
 

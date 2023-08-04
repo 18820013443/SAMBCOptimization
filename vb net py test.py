@@ -1,10 +1,11 @@
 import time
 import sys
 
+
 class Test:
 
     def __init__(self) -> None:
-        
+
         pass
 
     @staticmethod
@@ -20,7 +21,6 @@ class Test:
             # sys.stdout.write('Error:%s\n'%(str(e)))
             sys.exit(1)
             pass
-
 
 
 if __name__ == '__main__':

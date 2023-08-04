@@ -1,5 +1,5 @@
 import pandas as pd
-
+import traceback
 from PandasUtils import PandasUtils
 
 
@@ -30,7 +30,6 @@ def test2():
 
     dfResult = PandasUtils.DeleteDuplicatedAbsRows(dfGrouped)
 
-
     dfList = []
     for groupName, dfGroup in dfGrouped:
         # 判断是否存在具有相同正负值的'Cut Quantity'
@@ -55,6 +54,8 @@ def test2():
 
     # 打印结果
     # print(filtered_df)
+
+
 def test3():
     # 创建包含数据的DataFrame
     df = pd.DataFrame({
@@ -80,5 +81,18 @@ def test3():
     print(result)
 
 
+def test4():
+    try:
+        try:
+            1 / 0
+        except Exception as e:
+            strE = traceback.format_exc()
+            raise Exception(e)
+    except Exception as e:
+        strE = traceback.format_exc()
+        print(strE)
+        pass
+
+
 if __name__ == '__main__':
-    test2()
+    test4()
