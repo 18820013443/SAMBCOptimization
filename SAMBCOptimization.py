@@ -43,7 +43,7 @@ class SAMBCOptimization:
         self.dfZDER = PandasUtils.GetDataFrame(self.mainFolder, 'ZDER.xlsx', 'Sheet1')
 
         # 将ZOCR.xls转成ZOCR.xlsx，并且读取dfZOCR
-        # ExcelUtils().ConvertXlsToXlsx(os.path.join(self.mainFolder, 'ZOCR.xls'))
+        ExcelUtils().ConvertXlsToXlsx(os.path.join(self.mainFolder, 'ZOCR.xls'))
         self.dfZOCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZOCR.xlsx', 'ZOCR')
 
         # 读取dfZCCR
