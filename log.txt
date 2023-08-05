@@ -99,3 +99,30 @@ TypeError: 'Logger' object is not callable
 [08/04/2023 05:13:32 PM INFO]:Fill in dfMain
 [08/04/2023 05:13:32 PM INFO]:Format dfMain
 [08/04/2023 05:13:42 PM INFO]:Write report to excel
+[08/05/2023 02:21:09 PM INFO]:Start
+[08/05/2023 02:21:41 PM INFO]:Files have been read to dataframe
+[08/05/2023 02:21:41 PM INFO]:Append ZDER to dfMain
+[08/05/2023 02:21:42 PM INFO]:Insert ZOCR to dfMain
+[08/05/2023 02:23:49 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/05/2023 02:23:49 PM INFO]:Delete D8
+[08/05/2023 02:23:49 PM INFO]:Write VBAK to dfMain
+[08/05/2023 02:23:49 PM INFO]:Write VBAP to dfMain
+[08/05/2023 02:23:49 PM INFO]:Write LIPS to dfMain
+[08/05/2023 02:32:25 PM INFO]:Start
+[08/05/2023 02:32:57 PM INFO]:Files have been read to dataframe
+[08/05/2023 02:32:57 PM INFO]:Append ZDER to dfMain
+[08/05/2023 02:32:58 PM INFO]:Insert ZOCR to dfMain
+[08/05/2023 02:35:01 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/05/2023 02:35:01 PM INFO]:Delete D8
+[08/05/2023 02:35:01 PM INFO]:Write VBAK to dfMain
+[08/05/2023 02:35:01 PM INFO]:Write VBAP to dfMain
+[08/05/2023 02:35:01 PM INFO]:Write LIPS to dfMain
+[08/05/2023 02:45:20 PM INFO]:Start
+[08/05/2023 02:45:52 PM INFO]:Files have been read to dataframe
+[08/05/2023 02:45:52 PM INFO]:Append ZDER to dfMain
+[08/05/2023 02:45:53 PM INFO]:Insert ZOCR to dfMain
+[08/05/2023 02:47:58 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/05/2023 02:47:58 PM INFO]:Delete D8
+[08/05/2023 02:47:58 PM INFO]:Write VBAK to dfMain
+[08/05/2023 02:47:58 PM INFO]:Write VBAP to dfMain
+[08/05/2023 02:47:58 PM INFO]:Write LIPS to dfMain

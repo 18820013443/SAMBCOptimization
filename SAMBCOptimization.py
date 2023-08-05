@@ -43,7 +43,7 @@ class SAMBCOptimization:
         self.dfZDER = PandasUtils.GetDataFrame(self.mainFolder, 'ZDER.xlsx', 'Sheet1')
 
         # 将ZOCR.xls转成ZOCR.xlsx，并且读取dfZOCR
-        ExcelUtils().ConvertXlsToXlsx(os.path.join(self.mainFolder, 'ZOCR.xls'))
+        # ExcelUtils().ConvertXlsToXlsx(os.path.join(self.mainFolder, 'ZOCR.xls'))
         self.dfZOCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZOCR.xlsx', 'ZOCR')
 
         # 读取dfZCCR
@@ -342,6 +342,9 @@ class SAMBCOptimization:
         self.dfOpenAllotment['操作日期(From)'] = pd.to_datetime(self.dfOpenAllotment['操作日期(From)'])
         self.dfOpenAllotment['操作日期(To)'] = pd.to_datetime(self.dfOpenAllotment['操作日期(To)'])
 
+        # 加前置0
+        self.dfOpenAllotment['Item Code'] = '0000000000' + self.dfOpenAllotment['Item Code']
+
         dfOpenAllotmentTemp = self.dfOpenAllotment
         dfMainTemp = self.dfMain
 
@@ -350,8 +353,11 @@ class SAMBCOptimization:
 
         dfMerged['促销装配额开放日缺货Y/N'] = 'N'
 
-        condition = (dfMerged['未满足原因代码'] == '01') & (dfMerged['操作日期(From)'] <= pd.to_datetime('today')) & (
-                dfMerged['操作日期(To)'] >= pd.to_datetime('today'))
+        # condition = (dfMerged['未满足原因代码'] == '01') & (dfMerged['操作日期(From)'] <= pd.to_datetime('today')) & (
+        #         dfMerged['操作日期(To)'] >= pd.to_datetime('today'))
+        currentDay = self.dfMain.loc[0, '分货日']
+        condition = (dfMerged['未满足原因代码'] == '01') & (dfMerged['操作日期(From)'] <= currentDay) & (
+                dfMerged['操作日期(To)'] >= currentDay)
         dfMerged.loc[condition, '促销装配额开放日缺货Y/N'] = 'Y'
 
         self.dfMain['促销装配额开放日缺货Y/N'] = dfMerged['促销装配额开放日缺货Y/N']
