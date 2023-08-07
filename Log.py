@@ -1,16 +1,20 @@
 import logging
+import pytz
+import datetime
 
 
 class Log:
     def __init__(self, level='DEBUG'):
         self.log = logging.getLogger('KK')
         self.log.setLevel(level)
+        self.beiJingTimeZone = pytz.timezone('Asia/Shanghai')
 
     def ConsoleHandle(self, level='DEBUG'):
         '''控制台处理器'''
         consoleHandler = logging.StreamHandler()
         consoleHandler.setLevel(level)
         consoleHandler.setFormatter(self.GetFormatter()[0])
+        consoleHandler.formatter.converter = lambda *args: datetime.datetime.now(self.beiJingTimeZone).timetuple()
         return consoleHandler
 
     def FileHandle(self, level='DEBUG'):
@@ -18,6 +22,7 @@ class Log:
         fileHandler = logging.FileHandler('./log.txt', mode='a', encoding='utf-8')
         fileHandler.setLevel(level)
         fileHandler.setFormatter(self.GetFormatter()[1])
+        fileHandler.formatter.converter = lambda *args: datetime.datetime.now(self.beiJingTimeZone).timetuple()
         return fileHandler
 
     def GetFormatter(self):
