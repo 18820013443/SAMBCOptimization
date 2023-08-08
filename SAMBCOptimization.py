@@ -1,5 +1,5 @@
 import sys
-
+import json
 import numpy as np
 import pandas as pd
 import time
@@ -448,9 +448,6 @@ class SAMBCOptimization:
 
     def GenerateDailyReport(self):
 
-        # 将dfMain写入clipboard
-        self.dfMain.to_clipboard(index=False, sep='\t')
-
         # 构造daily report name
         date = datetime.strptime(self.strDocumentDate, '%d.%m.%Y')
         strDate = date.strftime('%Y%m%d')
@@ -460,13 +457,28 @@ class SAMBCOptimization:
 
         # 将剪切板的数据插入到Final Report Template.xlsx中, strDocumentDate = 'dd.MM.yyyy'
         filePath = os.path.join(self.mainFolder, 'Final Report Template.xlsx')
-        ExcelUtils(filePath).SaveXlsx('Sheet1', strDailyReportName)
+
+        # 将dfMain写入clipboard, 并且写入excel保存
+        # self.dfMain.to_clipboard(index=False, header=False, sep='\t', encoding='utf-8')
+        # ExcelUtils(filePath).SaveXlsx('Sheet1', strDailyReportName)
+
+        ExcelUtils(filePath).SaveXlsxWings('Sheet1', strDailyReportName, self.dfMain)
         return strDailyReportName
 
     def Main(self):
         # df = pd.read_excel(filePath, sheet_name="Sheet1", dtype='str')
         # print("读数据的时间为%ss"%(time.time() - timeStart))
-        self.logger.info('Start')
+        
+        startParameters = {
+            'isJIT': self.isJIT,
+            'marketName': self.marketName,
+            'strDocumentDate': self.strDocumentDate
+        }
+
+        datajson = json.dumps(startParameters)
+
+        self.logger.info('Start with paramaters: %s' % datajson)
+
         try:
             self.ReadFilesToDataFrame()
             self.logger.info('Files have been read to dataframe')
@@ -528,10 +540,15 @@ if __name__ == '__main__':
     timeStart = time.time()
 
     # 定义执行文件的入参
-    args = sys.argv
-    isJIT = args[1].lower() == 'true'
-    marketName = args[2]
-    strDocumentDate = args[3]
+    # args = sys.argv
+    # isJIT = args[1].lower() == 'true'
+    # marketName = args[2]
+    # strDocumentDate = args[3]
+
+    # 测试配置
+    isJIT = False
+    marketName = 'GBJ'
+    strDocumentDate = '08.08.2023'
 
     # 实例化对象并且执行Main方法
     obj = SAMBCOptimization(isJIT, marketName, strDocumentDate)

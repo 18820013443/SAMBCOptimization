@@ -1,17 +1,21 @@
 import win32com.client as win32
 import os
 import traceback
-
+import pywintypes
 import pandas as pd
+from win32com.client import constants
+import xlwings as xw
 
 
 class ExcelUtils:
 
     def __init__(self, filePath):
-        self.app = win32.DispatchEx('Excel.Application')
+        # self.app = win32.DispatchEx('Excel.Application')
+        self.app = win32.gencache.EnsureDispatch('Excel.Application')
         self.app.Application.DisplayAlerts = False
         self.app.Application.ScreenUpdating = False
         self.app.Application.Visible = False
+        # self.app.DefaultWebOptions.Encoding = win32.constants.xlUTF8
 
         self.filePath = filePath
         self.fileName, self.extension = os.path.splitext(os.path.basename(filePath))
@@ -19,9 +23,9 @@ class ExcelUtils:
     def ConvertXlsToXlsx(self):
         try:
             fileName = '%s.xlsx' % self.fileName
-            dirName = os.path.dirname(filePath)
+            dirName = os.path.dirname(self.filePath)
             newFilePath = os.path.join(dirName, fileName)
-            wk = self.app.Workbooks.Open(filePath, False, False)
+            wk = self.app.Workbooks.Open(self.filePath, False, False)
             wk.SaveAs(newFilePath, 51, ConflictResolution=2)
             # print(wk.Sheets(sheetName).Range("A1").Value)
             wk.Close()
@@ -35,7 +39,7 @@ class ExcelUtils:
         try:
             # fileName, extension = os.path.splitext(os.path.basename(filePath))
             fileName = '%s.xlsx' % self.fileName
-            dirName = os.path.dirname(filePath)
+            dirName = os.path.dirname(self.filePath)
             newFilePath = os.path.join(dirName, fileName)
             wk = self.app.Workbooks.Open(filePath, False, False)
             wk.Sheets(sheetName).UsedRange.Copy()
@@ -59,8 +63,17 @@ class ExcelUtils:
             wk.Sheets(sheetName).Activate()
 
             # 将剪切板数据paste到excel中
+            # xlPasteValues = pywintypes.UnicodeType(-4163)
+            # xlPasteSpecialOperationNone = pywintypes.UnicodeType(-4142)
+
+            # xlPasteValues = constants.xlPasteValues
+            # xlPasteSpecialOperationNone = constants.xlPasteSpecialOperationNone
+
             wk.Sheets(sheetName).Range("A2").Select()
-            wk.Sheets(sheetName).Range("A2").PasteSpecial(-4163, -4142, False, False)
+            # wk.Sheets(sheetName).Range("A2").PasteSpecial('-4163', '-4142', False, False)
+            # wk.Sheets(sheetName).Range("A2").PasteSpecial(xlPasteValues, xlPasteSpecialOperationNone, False, False)
+            # wk.Sheets(sheetName).Range("A2").PasteSpecial(Format="Text", Link=False, DisplayAsIcon=False)
+            wk.Sheets(sheetName).PasteSpecial(Format="Text", Link=False, DisplayAsIcon=False)
 
             # 删除header
             wk.Sheets(sheetName).Rows(2).Delete()
@@ -75,6 +88,25 @@ class ExcelUtils:
             self.app.Quit()
         except Exception as e:
             self.app.Quit()
+            strE = traceback.format_exc()
+            raise Exception(strE)
+
+    def SaveXlsxWings(self, sheetName, dailyReportName, df):
+        try:
+            # 构造新file路径
+            dirName = os.path.dirname(self.filePath)
+            newFilePath = os.path.join(dirName, dailyReportName)
+
+            app = xw.App(visible=False)
+            wk = app.books.open(self.filePath)
+            # wk.sheets[sheetName].range('A2').api.PasteSpecial()
+            wk.sheets[sheetName].range('A2').value = df.values
+            wk.api.RefreshAll()
+            wk.save(newFilePath)
+            wk.close()
+            app.quit()
+        except Exception as e:
+            app.quit()
             strE = traceback.format_exc()
             raise Exception(strE)
 
