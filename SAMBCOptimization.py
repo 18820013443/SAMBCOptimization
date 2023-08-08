@@ -540,15 +540,15 @@ if __name__ == '__main__':
     timeStart = time.time()
 
     # 定义执行文件的入参
-    # args = sys.argv
-    # isJIT = args[1].lower() == 'true'
-    # marketName = args[2]
-    # strDocumentDate = args[3]
+    args = sys.argv
+    isJIT = args[1].lower() == 'true'
+    marketName = args[2]
+    strDocumentDate = args[3]
 
     # 测试配置
-    isJIT = False
-    marketName = 'GBJ'
-    strDocumentDate = '08.08.2023'
+    # isJIT = False
+    # marketName = 'GBJ'
+    # strDocumentDate = '08.08.2023'
 
     # 实例化对象并且执行Main方法
     obj = SAMBCOptimization(isJIT, marketName, strDocumentDate)
