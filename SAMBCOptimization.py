@@ -466,8 +466,8 @@ class SAMBCOptimization:
         return strDailyReportName
 
     def Main(self):
-        # df = pd.read_excel(filePath, sheet_name="Sheet1", dtype='str')
-        # print("读数据的时间为%ss"%(time.time() - timeStart))
+
+        timeStart = time.time()
         
         startParameters = {
             'isJIT': self.isJIT,
@@ -532,13 +532,12 @@ class SAMBCOptimization:
             strE = traceback.format_exc()
             self.logger.debug(strE)
             sys.exit(1)
-        pass
-        # print(df)
+        
+        self.logger.info('Total run time is %ds' % int(time.time() - timeStart))
 
 
 if __name__ == '__main__':
-    timeStart = time.time()
-
+    
     # 定义执行文件的入参
     args = sys.argv
     isJIT = args[1].lower() == 'true'
@@ -553,4 +552,3 @@ if __name__ == '__main__':
     # 实例化对象并且执行Main方法
     obj = SAMBCOptimization(isJIT, marketName, strDocumentDate)
     obj.Main()
-    print(time.time() - timeStart)
