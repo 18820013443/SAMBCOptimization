@@ -8,15 +8,19 @@ from YamlHandler import YamlHandler
 from PandasUtils import PandasUtils
 from Log import Log
 import traceback
+from datetime import datetime
 from ExcelUtils import ExcelUtils
 
 
 class SAMBCOptimization:
-    def __init__(self) -> None:
+    def __init__(self, isJIT, marketName, strDocumentDate) -> None:
         self.Initialize()
         self.dfMain = None
         log = Log()
         self.logger = log.GetLog()
+        self.marketName = marketName
+        self.isJIT = isJIT
+        self.strDocumentDate = strDocumentDate
 
         self.mainFolder = '%s/Input Files' % os.getcwd() if self.isTestMode else os.getcwd()
 
@@ -43,7 +47,7 @@ class SAMBCOptimization:
         self.dfZDER = PandasUtils.GetDataFrame(self.mainFolder, 'ZDER.xlsx', 'Sheet1')
 
         # 将ZOCR.xls转成ZOCR.xlsx，并且读取dfZOCR
-        ExcelUtils().ConvertXlsToXlsx(os.path.join(self.mainFolder, 'ZOCR.xls'))
+        ExcelUtils(os.path.join(self.mainFolder, 'ZOCR.xls')).ConvertXlsToXlsx()
         self.dfZOCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZOCR.xlsx', 'ZOCR')
 
         # 读取dfZCCR
@@ -442,6 +446,23 @@ class SAMBCOptimization:
 
         pass
 
+    def GenerateDailyReport(self):
+
+        # 将dfMain写入clipboard
+        self.dfMain.to_clipboard(index=False, sep='\t')
+
+        # 构造daily report name
+        date = datetime.strptime(self.strDocumentDate, '%d.%m.%Y')
+        strDate = date.strftime('%Y%m%d')
+
+        strJIT = ' JIT' if isJIT else ''
+        strDailyReportName = '{} Daily SAMBC Report {}{}.xlsx'.format(self.marketName, strDate, strJIT)
+
+        # 将剪切板的数据插入到Final Report Template.xlsx中, strDocumentDate = 'dd.MM.yyyy'
+        filePath = os.path.join(self.mainFolder, 'Final Report Template.xlsx')
+        ExcelUtils(filePath).SaveXlsx('Sheet1', strDailyReportName)
+        return strDailyReportName
+
     def Main(self):
         # df = pd.read_excel(filePath, sheet_name="Sheet1", dtype='str')
         # print("读数据的时间为%ss"%(time.time() - timeStart))
@@ -489,8 +510,11 @@ class SAMBCOptimization:
             self.FormatDfMain()
             self.logger.info('Format dfMain')
 
-            self.dfMain.to_excel('output.xlsx', index=False)
-            self.logger.info('Write report to excel')
+            # self.dfMain.to_excel('%s output.xlsx' % self.marketName, index=False)
+            # self.logger.info('Write %s output.xlsx' % self.marketName)
+
+            strDailyReportName = self.GenerateDailyReport()
+            self.logger.info('Generate report %s' % strDailyReportName)
 
         except Exception as e:
             strE = traceback.format_exc()
@@ -502,6 +526,14 @@ class SAMBCOptimization:
 
 if __name__ == '__main__':
     timeStart = time.time()
-    obj = SAMBCOptimization()
+
+    # 定义执行文件的入参
+    args = sys.argv
+    isJIT = args[0]
+    marketName = args[1]
+    strDocumentDate = args[2]
+
+    # 实例化对象并且执行Main方法
+    obj = SAMBCOptimization(isJIT, marketName, strDocumentDate)
     obj.Main()
     print(time.time() - timeStart)
