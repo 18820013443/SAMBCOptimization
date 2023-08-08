@@ -529,7 +529,7 @@ if __name__ == '__main__':
 
     # 定义执行文件的入参
     args = sys.argv
-    isJIT = args[0]
+    isJIT = args[0].lower() == 'true'
     marketName = args[1]
     strDocumentDate = args[2]
 
