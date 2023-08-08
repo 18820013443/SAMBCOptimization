@@ -529,9 +529,9 @@ if __name__ == '__main__':
 
     # 定义执行文件的入参
     args = sys.argv
-    isJIT = args[0].lower() == 'true'
-    marketName = args[1]
-    strDocumentDate = args[2]
+    isJIT = args[1].lower() == 'true'
+    marketName = args[2]
+    strDocumentDate = args[3]
 
     # 实例化对象并且执行Main方法
     obj = SAMBCOptimization(isJIT, marketName, strDocumentDate)
