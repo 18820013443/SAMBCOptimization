@@ -10,8 +10,8 @@ import xlwings as xw
 class ExcelUtils:
 
     def __init__(self, filePath):
-        # self.app = win32.DispatchEx('Excel.Application')
-        self.app = win32.gencache.EnsureDispatch('Excel.Application')
+        self.app = win32.DispatchEx('Excel.Application')
+        # self.app = win32.gencache.EnsureDispatch('Excel.Application')
         self.app.Application.DisplayAlerts = False
         self.app.Application.ScreenUpdating = False
         self.app.Application.Visible = False
