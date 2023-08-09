@@ -14,6 +14,7 @@ from ExcelUtils import ExcelUtils
 
 class SAMBCOptimization:
     def __init__(self, isJIT, marketName, strDocumentDate) -> None:
+        self.dirName = self.GetDirName()
         self.Initialize()
         self.dfMain = None
         log = Log()
@@ -21,12 +22,19 @@ class SAMBCOptimization:
         self.marketName = marketName
         self.isJIT = isJIT
         self.strDocumentDate = strDocumentDate
+        # self.mainFolder = '%s/Input Files' % os.getcwd() if self.isTestMode else os.getcwd()
+        self.mainFolder = '%s/Input Files' % self.dirName if self.isTestMode else self.dirName
 
-        self.mainFolder = '%s/Input Files' % os.getcwd() if self.isTestMode else os.getcwd()
+    def GetDirName(self):
+        scriptPath = os.path.abspath(__file__)
+        dirName = os.path.dirname(scriptPath)
+        return dirName
 
     def Initialize(self):
+        # self.settings = YamlHandler(os.path.join(
+        #     os.getcwd(), 'config.yaml')).ReadYaml()
         self.settings = YamlHandler(os.path.join(
-            os.getcwd(), 'config.yaml')).ReadYaml()
+            self.dirName, 'config.yaml')).ReadYaml()
 
         self.isTestMode = self.settings['isTestMode']
         self.zderRevisedColumns = self.settings['zderRevisedColumns']
