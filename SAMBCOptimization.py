@@ -303,7 +303,7 @@ class SAMBCOptimization:
             except Exception as e:
                 rowData = row.to_json(indent=2, force_ascii=False)
                 strE = traceback.format_exc()
-                self.logger.debug('Write ZCCR Cut Reason Error and the row data is \n: %s' % rowData)
+                self.logger.debug(('Write ZCCR Cut Reason Error and the row data is \n: %s' % rowData).encode('utf8'))
                 raise Exception(e)
 
                     # --------------不存在59 End--------------#
@@ -480,6 +480,56 @@ class SAMBCOptimization:
         ExcelUtils(filePath).SaveXlsxWings('Sheet1', strDailyReportName, self.dfMain)
         return strDailyReportName
 
+    def CombineDataLogic(self):
+        self.ReadFilesToDataFrame()
+        self.logger.info('Files have been read to dataframe')
+
+        self.AppendDfZderToDfMain()
+        self.logger.info('Append ZDER to dfMain')
+
+        self.InsertZocrOrderValueToDfMain()
+        self.logger.info('Insert ZOCR to dfMain')
+
+        self.WriteZccrCutReasonToDfMain()
+        self.logger.info('Write ZCCR Cut Reason to dfMain')
+
+        self.DfMainDeleteD8Records()
+        self.logger.info('Delete D8')
+
+        self.WriteVBAKToDfMain()
+        self.logger.info('Write VBAK to dfMain')
+
+        self.WriteVBAPToDfMain()
+        self.logger.info('Write VBAP to dfMain')
+
+        self.WriteLIPSToDfMain()
+        self.logger.info('Write LIPS to dfMain')
+
+        self.WriteOpenAllotmentToDfMain()
+        self.logger.info('Write Open Allotment to dfMain')
+
+        self.AppedZeerToDfMain()
+        self.logger.info('Append ZEER to dfMain')
+
+        self.WriteCustomerListToDfMain()
+        self.logger.info('Write Customer List to dfMain')
+
+        self.WritePriceListToDfMain()
+        self.logger.info('Write Price List to dfMain')
+
+        self.FillInDfMain()
+        self.logger.info('Fill in dfMain')
+
+        self.FormatDfMain()
+        self.logger.info('Format dfMain')
+
+        # self.dfMain.to_excel('%s output.xlsx' % self.marketName, index=False)
+        # self.logger.info('Write %s output.xlsx' % self.marketName)
+
+        strDailyReportName = self.GenerateDailyReport()
+        self.logger.info('Generate report %s' % strDailyReportName)
+        pass
+
     def Main(self):
 
         timeStart = time.time()
@@ -492,57 +542,10 @@ class SAMBCOptimization:
 
         datajson = json.dumps(startParameters)
 
-        self.logger.info('Start with paramaters: %s' % datajson)
+        self.logger.info(('Start with paramaters: %s' % datajson).encode('utf8'))
 
         try:
-            self.ReadFilesToDataFrame()
-            self.logger.info('Files have been read to dataframe')
-
-            self.AppendDfZderToDfMain()
-            self.logger.info('Append ZDER to dfMain')
-
-            self.InsertZocrOrderValueToDfMain()
-            self.logger.info('Insert ZOCR to dfMain')
-
-            self.WriteZccrCutReasonToDfMain()
-            self.logger.info('Write ZCCR Cut Reason to dfMain')
-
-            self.DfMainDeleteD8Records()
-            self.logger.info('Delete D8')
-
-            self.WriteVBAKToDfMain()
-            self.logger.info('Write VBAK to dfMain')
-
-            self.WriteVBAPToDfMain()
-            self.logger.info('Write VBAP to dfMain')
-
-            self.WriteLIPSToDfMain()
-            self.logger.info('Write LIPS to dfMain')
-
-            self.WriteOpenAllotmentToDfMain()
-            self.logger.info('Write Open Allotment to dfMain')
-
-            self.AppedZeerToDfMain()
-            self.logger.info('Append ZEER to dfMain')
-
-            self.WriteCustomerListToDfMain()
-            self.logger.info('Write Customer List to dfMain')
-
-            self.WritePriceListToDfMain()
-            self.logger.info('Write Price List to dfMain')
-
-            self.FillInDfMain()
-            self.logger.info('Fill in dfMain')
-
-            self.FormatDfMain()
-            self.logger.info('Format dfMain')
-
-            # self.dfMain.to_excel('%s output.xlsx' % self.marketName, index=False)
-            # self.logger.info('Write %s output.xlsx' % self.marketName)
-
-            strDailyReportName = self.GenerateDailyReport()
-            self.logger.info('Generate report %s' % strDailyReportName)
-
+            self.CombineDataLogic()
         except Exception as e:
             strE = traceback.format_exc()
             self.logger.debug(strE)
