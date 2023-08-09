@@ -2,6 +2,9 @@
 isTestMode:
   True
 
+# 日志路径
+logPath: ''
+
 
 # ZDER要保留的栏位，以及要修改成对应的字段名
 zderRevisedColumns:

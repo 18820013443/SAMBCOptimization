@@ -1,6 +1,7 @@
 import logging
 import pytz
 import datetime
+import os
 
 
 class Log:
@@ -8,6 +9,7 @@ class Log:
         self.log = logging.getLogger('KK')
         self.log.setLevel(level)
         self.beiJingTimeZone = pytz.timezone('Asia/Shanghai')
+        self.logPath = self.GetLogPath()
 
     def ConsoleHandle(self, level='DEBUG'):
         '''控制台处理器'''
@@ -19,7 +21,7 @@ class Log:
 
     def FileHandle(self, level='DEBUG'):
         '''文件处理器'''
-        fileHandler = logging.FileHandler('./log.txt', mode='a', encoding='utf-8')
+        fileHandler = logging.FileHandler(self.logPath, mode='a', encoding='utf-8')
         fileHandler.setLevel(level)
         fileHandler.setFormatter(self.GetFormatter()[1])
         fileHandler.formatter.converter = lambda *args: datetime.datetime.now(self.beiJingTimeZone).timetuple()
@@ -37,3 +39,13 @@ class Log:
             self.log.addHandler(self.ConsoleHandle())
             self.log.addHandler(self.FileHandle())
         return self.log
+
+    def GetDirName(self):
+        scriptPath = os.path.abspath(__file__)
+        dirName = os.path.dirname(scriptPath)
+        return dirName
+    
+    def GetLogPath(self):
+        dirName = self.GetDirName()
+        logPath = os.path.join(dirName, 'log.txt')
+        return logPath

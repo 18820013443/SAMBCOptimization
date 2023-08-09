@@ -18,6 +18,7 @@ class SAMBCOptimization:
         self.Initialize()
         self.dfMain = None
         log = Log()
+        log.logPath = self.GetLogPath()
         self.logger = log.GetLog()
         self.marketName = marketName
         self.isJIT = isJIT
@@ -29,13 +30,17 @@ class SAMBCOptimization:
         scriptPath = os.path.abspath(__file__)
         dirName = os.path.dirname(scriptPath)
         return dirName
+    
+    def GetLogPath(self):
+        strLogPath = self.settings['logPath']
+        logPath = strLogPath if strLogPath != '' else os.path.join(self.dirName, 'log.txt')
+        return logPath
 
     def Initialize(self):
         # self.settings = YamlHandler(os.path.join(
         #     os.getcwd(), 'config.yaml')).ReadYaml()
         self.settings = YamlHandler(os.path.join(
             self.dirName, 'config.yaml')).ReadYaml()
-
         self.isTestMode = self.settings['isTestMode']
         self.zderRevisedColumns = self.settings['zderRevisedColumns']
         self.zderReservedColumnList = self.zderRevisedColumns.keys()
@@ -301,9 +306,10 @@ class SAMBCOptimization:
 
                 dfUnsatisfiedQty.iloc[index] = row
             except Exception as e:
-                rowData = row.to_json(indent=2, force_ascii=False)
+                rowData = str(row.to_json(indent=2, force_ascii=False))
                 strE = traceback.format_exc()
-                self.logger.debug(('Write ZCCR Cut Reason Error and the row data is \n: %s' % rowData).encode('utf8'))
+                # self.logger.debug(('Write ZCCR Cut Reason Error and the row data is: \n %s' % rowData).encode('utf8'))
+                self.logger.debug('Write ZCCR Cut Reason Error and the row data is: \n %s' % rowData)
                 raise Exception(e)
 
                     # --------------不存在59 End--------------#
@@ -540,9 +546,11 @@ class SAMBCOptimization:
             'strDocumentDate': self.strDocumentDate
         }
 
-        datajson = json.dumps(startParameters)
+        # dataJson = json.dumps(startParameters).encode('utf8')
+        dataJson = str(startParameters)
 
-        self.logger.info(('Start with paramaters: %s' % datajson).encode('utf8'))
+        # self.logger.info(('Start with paramaters: %s' % dataJson).encode('utf8'))
+        self.logger.info('Start with paramaters: %s' % dataJson)
 
         try:
             self.CombineDataLogic()
