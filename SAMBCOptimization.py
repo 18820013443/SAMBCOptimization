@@ -216,6 +216,9 @@ class SAMBCOptimization:
         if self.dfZCCR is None:
             return
 
+        # 将dfZCCR的Cut Quantity改为float类型
+        self.dfZCCR['Cut Quantity'] = pd.to_numeric(self.dfZCCR['Cut Quantity'])
+
         self.CalculateNotSatisfiedQty()
 
         dfUnsatisfiedQty = self.dfMain.loc[(self.dfMain['未满足数量'] != np.nan) | (self.dfMain['未满足数量'] != 0)]
