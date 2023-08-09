@@ -1,5 +1,5 @@
 import os
-
+import json
 import numpy as np
 import pandas as pd
 
@@ -139,15 +139,16 @@ class PandasUtils:
 
     @staticmethod
     def HasNegativeQuantityForD4(dfZCCRCutReason):
-        hasNegativeQuantityForD4 = (dfZCCRCutReason['Rsn. Code'] == 'D4') & (dfZCCRCutReason['Cut Quantity'] < 0)
-
+        df = dfZCCRCutReason[(dfZCCRCutReason['Rsn. Code'] == '04') & (dfZCCRCutReason['Cut Quantity'] < 0)]
+        hasNegativeQuantityForD4 = df.shape[0] > 0
+        
         return hasNegativeQuantityForD4
 
     @staticmethod
     def IsZeroSumD4And07(dfZCCRCutReason):
 
         numSumD4And07 = dfZCCRCutReason.loc[(dfZCCRCutReason['Rsn. Code'] == 'D4') | (dfZCCRCutReason['Rsn. Code'] == '07'), 'Cut Quantity'].sum()
-        return numSumD4And07 == 0
+        return int(numSumD4And07) == 0
 
     @staticmethod
     def SumQtyForSameReasonCode(dfZCCRCutReason):
@@ -178,6 +179,19 @@ class PandasUtils:
         numRows = df.shape[0]
         reasonCode = df.loc[numRows - 1, ['Rsn. Code']][0]
         return reasonCode
+
+    @staticmethod
+    def GenerateDfForTest():
+        with open('testData.txt', 'r', encoding='utf8') as f:
+            jsonData = json.load(f)
+        
+        df = pd.DataFrame([jsonData])
+        pass
+        return df
+
+
+if __name__ == '__main__':
+    PandasUtils.GenerateDfForTest()
 
 
 

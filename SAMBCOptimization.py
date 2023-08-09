@@ -226,6 +226,10 @@ class SAMBCOptimization:
 
         dfUnsatisfiedQty.drop_duplicates(subset=['宝洁订单号', '宝洁产品代码'], keep='first')
 
+        # 仅用于测试， test Only
+        if self.isTestMode:
+            dfUnsatisfiedQty = PandasUtils.GenerateDfForTest()
+
         for index, row in dfUnsatisfiedQty.iterrows():
             try:
                 strSalesOrder = row['宝洁订单号'].lstrip('0')
