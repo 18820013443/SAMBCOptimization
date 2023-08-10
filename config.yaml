@@ -1,10 +1,12 @@
 # 测试环境变量
 isTestMode:
-  True
+  False
 
 # 日志路径
 logPath: ''
 
+# 日志时区timeZone
+timeZone: 'Asia/Shanghai'
 
 # ZDER要保留的栏位，以及要修改成对应的字段名
 zderRevisedColumns:

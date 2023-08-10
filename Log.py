@@ -2,13 +2,15 @@ import logging
 import pytz
 import datetime
 import os
+from YamlHandler import YamlHandler
 
 
 class Log:
     def __init__(self, level='DEBUG'):
         self.log = logging.getLogger('KK')
         self.log.setLevel(level)
-        self.beiJingTimeZone = pytz.timezone('Asia/Shanghai')
+        strTimeZone = self.GetTimeZone()
+        self.timeZone = pytz.timezone(strTimeZone)
         self.logPath = self.GetLogPath()
 
     def ConsoleHandle(self, level='DEBUG'):
@@ -16,7 +18,7 @@ class Log:
         consoleHandler = logging.StreamHandler()
         consoleHandler.setLevel(level)
         consoleHandler.setFormatter(self.GetFormatter()[0])
-        consoleHandler.formatter.converter = lambda *args: datetime.datetime.now(self.beiJingTimeZone).timetuple()
+        consoleHandler.formatter.converter = lambda *args: datetime.datetime.now(self.timeZone).timetuple()
         return consoleHandler
 
     def FileHandle(self, level='DEBUG'):
@@ -24,7 +26,7 @@ class Log:
         fileHandler = logging.FileHandler(self.logPath, mode='a', encoding='utf-8')
         fileHandler.setLevel(level)
         fileHandler.setFormatter(self.GetFormatter()[1])
-        fileHandler.formatter.converter = lambda *args: datetime.datetime.now(self.beiJingTimeZone).timetuple()
+        fileHandler.formatter.converter = lambda *args: datetime.datetime.now(self.timeZone).timetuple()
         return fileHandler
 
     def GetFormatter(self):
@@ -49,3 +51,17 @@ class Log:
         dirName = self.GetDirName()
         logPath = os.path.join(dirName, 'log.txt')
         return logPath
+
+    def GetTimeZone(self):
+        dirName = self.GetDirName()
+        self.settings = YamlHandler(os.path.join(
+            dirName, 'config.yaml')).ReadYaml()
+        strTimeZone = self.settings['timeZone']
+        return strTimeZone
+
+    
+if __name__ == '__main__':
+    obj = Log()
+    print(obj.GetTimeZone())
+
+
