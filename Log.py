@@ -2,7 +2,7 @@ import logging
 import pytz
 import datetime
 import os
-from YamlHandler import YamlHandler
+from YamlHandler import Settings
 
 
 class Log:
@@ -53,10 +53,10 @@ class Log:
         return logPath
 
     def GetTimeZone(self):
-        dirName = self.GetDirName()
-        self.settings = YamlHandler(os.path.join(
-            dirName, 'config.yaml')).ReadYaml()
-        strTimeZone = self.settings['timeZone']
+        # dirName = self.GetDirName()
+        # self.settings = YamlHandler(os.path.join(
+        #     dirName, 'config.yaml')).ReadYaml()
+        strTimeZone = Settings.config.get('timeZone')
         return strTimeZone
 
     

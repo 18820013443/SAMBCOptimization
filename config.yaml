@@ -1,6 +1,6 @@
 # 测试环境变量
 isTestMode:
-  False
+  True
 
 # 日志路径
 logPath: ''

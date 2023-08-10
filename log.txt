@@ -126,3 +126,184 @@ TypeError: 'Logger' object is not callable
 [08/05/2023 02:47:58 PM INFO]:Write VBAK to dfMain
 [08/05/2023 02:47:58 PM INFO]:Write VBAP to dfMain
 [08/05/2023 02:47:58 PM INFO]:Write LIPS to dfMain
+[08/10/2023 06:08:40 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'GBJ', 'strDocumentDate': '08.08.2023'}
+[08/10/2023 06:09:14 PM INFO]:Files have been read to dataframe
+[08/10/2023 06:09:14 PM INFO]:Append ZDER to dfMain
+[08/10/2023 06:09:15 PM INFO]:Insert ZOCR to dfMain
+[08/10/2023 06:09:15 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/10/2023 06:09:15 PM INFO]:Delete D8
+[08/10/2023 06:09:15 PM INFO]:Write VBAK to dfMain
+[08/10/2023 06:09:15 PM INFO]:Write VBAP to dfMain
+[08/10/2023 06:09:15 PM INFO]:Write LIPS to dfMain
+[08/10/2023 06:09:15 PM INFO]:Write Open Allotment to dfMain
+[08/10/2023 06:09:15 PM INFO]:Append ZEER to dfMain
+[08/10/2023 06:09:15 PM INFO]:Write Customer List to dfMain
+[08/10/2023 06:09:15 PM INFO]:Write Price List to dfMain
+[08/10/2023 06:09:15 PM DEBUG]:Traceback (most recent call last):
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 560, in Main
+    self.CombineDataLogic()
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 530, in CombineDataLogic
+    self.FillInDfMain()
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 440, in FillInDfMain
+    ['砍单原因', '未满足单品补货指引'])
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 60, in UpdateDfMainFromDfOther
+    dfMerged = pd.merge(dfMain, dfOther, left_on=leftConditionColumnList, right_on=rightConditionColumnList, how='left', suffixes=('', '_x'))
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 119, in merge
+    validate=validate,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 703, in __init__
+    self._maybe_coerce_merge_keys()
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 1256, in _maybe_coerce_merge_keys
+    raise ValueError(msg)
+ValueError: You are trying to merge on float64 and object columns. If you wish to proceed you should use pd.concat
+
+[08/10/2023 06:12:45 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'GBJ', 'strDocumentDate': '08.08.2023'}
+[08/10/2023 06:14:18 PM INFO]:Files have been read to dataframe
+[08/10/2023 06:14:18 PM INFO]:Append ZDER to dfMain
+[08/10/2023 06:15:02 PM INFO]:Insert ZOCR to dfMain
+[08/10/2023 06:15:35 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/10/2023 06:15:35 PM INFO]:Delete D8
+[08/10/2023 06:15:37 PM INFO]:Write VBAK to dfMain
+[08/10/2023 06:15:38 PM INFO]:Write VBAP to dfMain
+[08/10/2023 06:15:42 PM INFO]:Write LIPS to dfMain
+[08/10/2023 06:15:42 PM INFO]:Write Open Allotment to dfMain
+[08/10/2023 06:15:42 PM INFO]:Append ZEER to dfMain
+[08/10/2023 06:15:42 PM INFO]:Write Customer List to dfMain
+[08/10/2023 06:15:42 PM INFO]:Write Price List to dfMain
+[08/10/2023 06:22:54 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'GBJ', 'strDocumentDate': '08.08.2023'}
+[08/10/2023 06:23:28 PM INFO]:Files have been read to dataframe
+[08/10/2023 06:23:28 PM INFO]:Append ZDER to dfMain
+[08/10/2023 06:23:28 PM INFO]:Insert ZOCR to dfMain
+[08/10/2023 06:23:29 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/10/2023 06:23:29 PM INFO]:Delete D8
+[08/10/2023 06:23:29 PM INFO]:Write VBAK to dfMain
+[08/10/2023 06:23:29 PM INFO]:Write VBAP to dfMain
+[08/10/2023 06:23:29 PM INFO]:Write LIPS to dfMain
+[08/10/2023 06:23:29 PM INFO]:Write Open Allotment to dfMain
+[08/10/2023 06:23:29 PM INFO]:Append ZEER to dfMain
+[08/10/2023 06:23:29 PM INFO]:Write Customer List to dfMain
+[08/10/2023 06:23:29 PM INFO]:Write Price List to dfMain
+[08/10/2023 06:23:29 PM DEBUG]:Traceback (most recent call last):
+  File "pandas\_libs\lib.pyx", line 2305, in pandas._libs.lib.maybe_convert_numeric
+ValueError: Unable to parse string "nan"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 564, in Main
+    self.CombineDataLogic()
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 534, in CombineDataLogic
+    self.FillInDfMain()
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 446, in FillInDfMain
+    self.dfMain['下单数量MSU'] = pd.to_numeric(self.dfMain['MSU/sale unit']) * pd.to_numeric(
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\tools\numeric.py", line 184, in to_numeric
+    values, set(), coerce_numeric=coerce_numeric
+  File "pandas\_libs\lib.pyx", line 2347, in pandas._libs.lib.maybe_convert_numeric
+ValueError: Unable to parse string "nan" at position 5114
+
+[08/10/2023 06:28:32 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'GBJ', 'strDocumentDate': '08.08.2023'}
+[08/10/2023 06:30:04 PM INFO]:Files have been read to dataframe
+[08/10/2023 06:30:04 PM INFO]:Append ZDER to dfMain
+[08/10/2023 06:30:07 PM INFO]:Insert ZOCR to dfMain
+[08/10/2023 06:30:19 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/10/2023 06:30:19 PM INFO]:Delete D8
+[08/10/2023 06:30:19 PM INFO]:Write VBAK to dfMain
+[08/10/2023 06:30:20 PM INFO]:Write VBAP to dfMain
+[08/10/2023 06:30:20 PM INFO]:Write LIPS to dfMain
+[08/10/2023 06:30:20 PM INFO]:Write Open Allotment to dfMain
+[08/10/2023 06:30:20 PM INFO]:Append ZEER to dfMain
+[08/10/2023 06:30:20 PM INFO]:Write Customer List to dfMain
+[08/10/2023 06:30:20 PM INFO]:Write Price List to dfMain
+[08/10/2023 06:35:56 PM DEBUG]:Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 564, in Main
+    self.CombineDataLogic()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 534, in CombineDataLogic
+    self.FillInDfMain()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 444, in FillInDfMain
+    ['砍单原因', '未满足单品补货指引'])
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 60, in UpdateDfMainFromDfOther
+    dfMerged = pd.merge(dfMain, dfOther, left_on=leftConditionColumnList, right_on=rightConditionColumnList, how='left', suffixes=('', '_x'))
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 119, in merge
+    validate=validate,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 703, in __init__
+    self._maybe_coerce_merge_keys()
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 1256, in _maybe_coerce_merge_keys
+    raise ValueError(msg)
+ValueError: You are trying to merge on float64 and object columns. If you wish to proceed you should use pd.concat
+
+[08/10/2023 06:42:06 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'GBJ', 'strDocumentDate': '08.08.2023'}
+[08/10/2023 06:43:43 PM INFO]:Files have been read to dataframe
+[08/10/2023 06:43:43 PM INFO]:Append ZDER to dfMain
+[08/10/2023 06:43:45 PM INFO]:Insert ZOCR to dfMain
+[08/10/2023 06:43:45 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/10/2023 06:43:45 PM INFO]:Delete D8
+[08/10/2023 06:43:45 PM INFO]:Write VBAK to dfMain
+[08/10/2023 06:43:45 PM INFO]:Write VBAP to dfMain
+[08/10/2023 06:43:46 PM INFO]:Write LIPS to dfMain
+[08/10/2023 06:43:46 PM INFO]:Write Open Allotment to dfMain
+[08/10/2023 06:43:46 PM INFO]:Append ZEER to dfMain
+[08/10/2023 06:43:46 PM INFO]:Write Customer List to dfMain
+[08/10/2023 06:43:46 PM INFO]:Write Price List to dfMain
+[08/10/2023 06:45:12 PM DEBUG]:Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 564, in Main
+    self.CombineDataLogic()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 534, in CombineDataLogic
+    self.FillInDfMain()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 444, in FillInDfMain
+    ['砍单原因', '未满足单品补货指引'])
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 60, in UpdateDfMainFromDfOther
+    dfMerged = pd.merge(dfMain, dfOther, left_on=leftConditionColumnList, right_on=rightConditionColumnList, how='left', suffixes=('', '_x'))
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 119, in merge
+    validate=validate,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 703, in __init__
+    self._maybe_coerce_merge_keys()
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 1256, in _maybe_coerce_merge_keys
+    raise ValueError(msg)
+ValueError: You are trying to merge on float64 and object columns. If you wish to proceed you should use pd.concat
+
+[08/10/2023 06:55:12 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'GBJ', 'strDocumentDate': '08.08.2023'}
+[08/10/2023 06:56:39 PM INFO]:Files have been read to dataframe
+[08/10/2023 06:56:39 PM INFO]:Append ZDER to dfMain
+[08/10/2023 06:56:41 PM INFO]:Insert ZOCR to dfMain
+[08/10/2023 06:56:41 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/10/2023 06:56:41 PM INFO]:Delete D8
+[08/10/2023 06:56:41 PM INFO]:Write VBAK to dfMain
+[08/10/2023 06:56:41 PM INFO]:Write VBAP to dfMain
+[08/10/2023 06:56:41 PM INFO]:Write LIPS to dfMain
+[08/10/2023 06:56:41 PM INFO]:Write Open Allotment to dfMain
+[08/10/2023 06:56:41 PM INFO]:Append ZEER to dfMain
+[08/10/2023 06:56:42 PM INFO]:Write Customer List to dfMain
+[08/10/2023 06:56:42 PM INFO]:Write Price List to dfMain
+[08/10/2023 06:56:47 PM DEBUG]:Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 564, in Main
+    self.CombineDataLogic()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 534, in CombineDataLogic
+    self.FillInDfMain()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 444, in FillInDfMain
+    ['砍单原因', '未满足单品补货指引'])
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 60, in UpdateDfMainFromDfOther
+    dfMerged = pd.merge(dfMain, dfOther, left_on=leftConditionColumnList, right_on=rightConditionColumnList, how='left', suffixes=('', '_x'))
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 119, in merge
+    validate=validate,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 703, in __init__
+    self._maybe_coerce_merge_keys()
+  File "C:\Program Files\Python37\lib\site-packages\pandas\core\reshape\merge.py", line 1256, in _maybe_coerce_merge_keys
+    raise ValueError(msg)
+ValueError: You are trying to merge on float64 and object columns. If you wish to proceed you should use pd.concat
+
+[08/10/2023 06:59:25 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'GBJ', 'strDocumentDate': '08.08.2023'}
+[08/10/2023 07:00:49 PM INFO]:Files have been read to dataframe
+[08/10/2023 07:00:49 PM INFO]:Append ZDER to dfMain
+[08/10/2023 07:00:51 PM INFO]:Insert ZOCR to dfMain
+[08/10/2023 07:00:51 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/10/2023 07:00:51 PM INFO]:Delete D8
+[08/10/2023 07:00:51 PM INFO]:Write VBAK to dfMain
+[08/10/2023 07:00:51 PM INFO]:Write VBAP to dfMain
+[08/10/2023 07:00:51 PM INFO]:Write LIPS to dfMain
+[08/10/2023 07:00:51 PM INFO]:Write Open Allotment to dfMain
+[08/10/2023 07:00:51 PM INFO]:Append ZEER to dfMain
+[08/10/2023 07:00:51 PM INFO]:Write Customer List to dfMain
+[08/10/2023 07:00:51 PM INFO]:Write Price List to dfMain
+[08/10/2023 07:00:51 PM INFO]:Fill in dfMain
+[08/10/2023 07:00:52 PM INFO]:Format dfMain
+[08/10/2023 07:01:04 PM INFO]:Generate report GBJ Daily SAMBC Report 20230808.xlsx
+[08/10/2023 07:01:04 PM INFO]:Total run time is 98s

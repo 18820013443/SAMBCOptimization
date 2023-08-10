@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import time
 import os
-from YamlHandler import YamlHandler
+from YamlHandler import Settings
 from PandasUtils import PandasUtils
 from Log import Log
 import traceback
@@ -14,22 +14,26 @@ from ExcelUtils import ExcelUtils
 
 class SAMBCOptimization:
     def __init__(self, isJIT, marketName, strDocumentDate) -> None:
-        self.dirName = self.GetDirName()
+        # self.dirName = self.GetDirName()
+        self.dirName = Settings.GetDirName()
+        self.settings = Settings.config
         self.Initialize()
         self.dfMain = None
+
         log = Log()
         log.logPath = self.GetLogPath()
         self.logger = log.GetLog()
+
         self.marketName = marketName
         self.isJIT = isJIT
         self.strDocumentDate = strDocumentDate
         # self.mainFolder = '%s/Input Files' % os.getcwd() if self.isTestMode else os.getcwd()
         self.mainFolder = '%s/Input Files' % self.dirName if self.isTestMode else self.dirName
 
-    def GetDirName(self):
-        scriptPath = os.path.abspath(__file__)
-        dirName = os.path.dirname(scriptPath)
-        return dirName
+    # def GetDirName(self):
+    #     scriptPath = os.path.abspath(__file__)
+    #     dirName = os.path.dirname(scriptPath)
+    #     return dirName
     
     def GetLogPath(self):
         strLogPath = self.settings['logPath']
@@ -39,8 +43,8 @@ class SAMBCOptimization:
     def Initialize(self):
         # self.settings = YamlHandler(os.path.join(
         #     os.getcwd(), 'config.yaml')).ReadYaml()
-        self.settings = YamlHandler(os.path.join(
-            self.dirName, 'config.yaml')).ReadYaml()
+        # self.settings = YamlHandler(os.path.join(
+        #     self.dirName, 'config.yaml')).ReadYaml()
         self.isTestMode = self.settings['isTestMode']
         self.zderRevisedColumns = self.settings['zderRevisedColumns']
         self.zderReservedColumnList = self.zderRevisedColumns.keys()
@@ -144,12 +148,12 @@ class SAMBCOptimization:
 
     def CalculateNotSatisfiedQty(self):
         # 将字符串列转换为数值类型
-        self.dfMain['未满足数量'] = pd.to_numeric(self.dfMain['未满足数量'])
-        self.dfMain['下单数量'] = pd.to_numeric(self.dfMain['下单数量'])
-        self.dfMain['分货数量'] = pd.to_numeric(self.dfMain['分货数量'])
+        # self.dfMain['未满足数量'] = pd.to_numeric(self.dfMain['未满足数量'])
+        # self.dfMain['下单数量'] = pd.to_numeric(self.dfMain['下单数量'])
+        # self.dfMain['分货数量'] = pd.to_numeric(self.dfMain['分货数量'])
 
         # 计算未满足数量
-        self.dfMain['未满足数量'] = self.dfMain['下单数量'] - self.dfMain['分货数量']
+        self.dfMain['未满足数量'] = pd.to_numeric(self.dfMain['下单数量']) - pd.to_numeric(self.dfMain['分货数量'])
         pass
 
     def OnlyD4And07Operations(self, dfGrouped, dfZCCRCutReason, row):
@@ -232,8 +236,8 @@ class SAMBCOptimization:
         dfUnsatisfiedQty.drop_duplicates(subset=['宝洁订单号', '宝洁产品代码'], keep='first')
 
         # 仅用于测试， test Only
-        if self.isTestMode:
-            dfUnsatisfiedQty = PandasUtils.GenerateDfForTest()
+        # if self.isTestMode:
+        #     dfUnsatisfiedQty = PandasUtils.GenerateDfForTest()
 
         for index, row in dfUnsatisfiedQty.iterrows():
             try:
@@ -315,6 +319,10 @@ class SAMBCOptimization:
                     # --------------不存在59 End--------------#
 
             # ---------------------找到有多条记录End---------------------#
+        
+
+        # 将dfMain的类型转成字符类型
+        self.dfMain = self.dfMain.astype('object')
 
         # 将dfUnsatisfiedQty中的cutReason回写到self.dfMain中
         PandasUtils.UpdateDfMainFromDfOther(self.dfMain, dfUnsatisfiedQty,
@@ -428,6 +436,9 @@ class SAMBCOptimization:
         self.dfMain.loc[self.dfMain['AO类型'].notnull(), '订单类型'] = '提前订单'
 
         # self.dfMain.loc[self.dfMain['AO类型'] != '']['订单类型'] = '提前订单'
+        
+        # 将dfMain的类型转成字符类型
+        self.dfMain = self.dfMain.astype('object')
 
         PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCutReasonList,
                                             ['未满足原因代码'],
@@ -564,16 +575,21 @@ class SAMBCOptimization:
 
 if __name__ == '__main__':
     
-    # 定义执行文件的入参
-    args = sys.argv
-    isJIT = args[1].lower() == 'true'
-    marketName = args[2]
-    strDocumentDate = args[3]
+    isTestMode = Settings.config.get('isTestMode')
 
-    # 测试配置
-    # isJIT = False
-    # marketName = 'GBJ'
-    # strDocumentDate = '08.08.2023'
+    if not isTestMode:
+
+        # 定义执行文件的入参
+        args = sys.argv
+        isJIT = args[1].lower() == 'true'
+        marketName = args[2]
+        strDocumentDate = args[3]
+    else:
+
+        # 测试配置
+        isJIT = False
+        marketName = 'GBJ'
+        strDocumentDate = '08.08.2023'
 
     # 实例化对象并且执行Main方法
     obj = SAMBCOptimization(isJIT, marketName, strDocumentDate)
