@@ -351,6 +351,8 @@ class SAMBCOptimization:
 
         # self.dfVBAP['VBELN'] = '0' + self.dfVBAP['VBELN']
         # self.dfVBAP['MATNR'] = '0000000000' + self.dfVBAP['MATNR']
+        self.dfVBAP.drop_duplicates(['VBELN', 'MATNR'], keep='first', inplace=True)
+        self.dfVBAP.reset_index(drop=True, inplace=True)
         PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfVBAP,
                                             ['宝洁订单号', '宝洁产品代码'],
                                             ['VBELN', 'MATNR'],

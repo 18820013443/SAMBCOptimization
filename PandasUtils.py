@@ -62,8 +62,10 @@ class PandasUtils:
 
     @staticmethod
     # 将dfOther中的几列数据跟新到dfMain中
-    def UpdateDfMainFromDfOther(dfMain, dfOther, leftConditionColumnList, rightConditionColumnList, leftUpdateColumnList, rightUpdateColumnList, ):
+    def UpdateDfMainFromDfOther(dfMain, dfOther, leftConditionColumnList, rightConditionColumnList, leftUpdateColumnList, rightUpdateColumnList):
         dfMerged = pd.merge(dfMain, dfOther, left_on=leftConditionColumnList, right_on=rightConditionColumnList, how='left', suffixes=('', '_x'))
+
+        # dfMerged.drop_duplicates(subset=leftConditionColumnList, keep='first', inplace=True)
 
         for i in range(0, len(leftUpdateColumnList)):
             if leftUpdateColumnList[i] != rightUpdateColumnList[i]:
@@ -77,6 +79,24 @@ class PandasUtils:
         # dfMain['下单数量'] = dfMerged['下单数量']
         # dfMain['分货号码'] = dfMerged['分货号码']
         # return dfMain
+
+
+    def UpdateDfMainFromDfOther1(dfMain, dfOther, main_key_columns, other_key_columns, fill_column, test):
+        """
+        将 dfOther 中的 fill_column 的值根据 main_key_columns 匹配到 dfMain 中的相应行，并填充到 dfMain 的 fill_column 列中。
+        
+        Parameters:
+            dfMain (DataFrame): 需要填充值的主要 DataFrame。
+            dfOther (DataFrame): 包含填充值的另一个 DataFrame。
+            main_key_columns (list): 用于匹配的主要 DataFrame 列名。
+            other_key_columns (list): 用于匹配的其他 DataFrame 列名。
+            fill_column (str): 需要填充的列名。
+        """
+        merge_columns = main_key_columns + other_key_columns
+        merged_df = dfMain.merge(dfOther, how='left', left_on=main_key_columns, right_on=other_key_columns, suffixes=('', '_other'))
+        dfMain[fill_column] = merged_df[fill_column + '_other'].combine_first(merged_df[fill_column])
+        dfMain.drop(columns=fill_column + '_other', inplace=True)
+        dfMain['客户产品代码'] = merged_df['客户产品代码'].combine_first(merged_df['KDMAT'])
 
     @staticmethod
     def HasSamePositiveAndNegativeValueForOneReason(dfGrouped):
