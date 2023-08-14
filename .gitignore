@@ -2,3 +2,4 @@ __pycahe__
 *.pyc
 compare.py
 diff.xlsx
+log.txt
