@@ -324,3 +324,416 @@ ValueError: You are trying to merge on float64 and object columns. If you wish t
 [08/10/2023 07:26:06 PM INFO]:Format dfMain
 [08/10/2023 07:26:24 PM INFO]:Generate report GBJ Daily SAMBC Report 20230808.xlsx
 [08/10/2023 07:26:24 PM INFO]:Total run time is 160s
+[08/14/2023 02:02:28 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 02:05:34 PM INFO]:Files have been read to dataframe
+[08/14/2023 02:05:34 PM INFO]:Append ZDER to dfMain
+[08/14/2023 02:05:35 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 02:05:39 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 02:05:39 PM INFO]:Delete D8
+[08/14/2023 02:05:39 PM INFO]:Write VBAK to dfMain
+[08/14/2023 02:05:39 PM INFO]:Write VBAP to dfMain
+[08/14/2023 02:05:39 PM INFO]:Write LIPS to dfMain
+[08/14/2023 02:05:39 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 02:05:39 PM INFO]:Append ZEER to dfMain
+[08/14/2023 02:05:39 PM INFO]:Write Customer List to dfMain
+[08/14/2023 02:05:39 PM INFO]:Write Price List to dfMain
+[08/14/2023 02:05:39 PM INFO]:Fill in dfMain
+[08/14/2023 02:09:23 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 02:09:34 PM INFO]:Files have been read to dataframe
+[08/14/2023 02:09:34 PM INFO]:Append ZDER to dfMain
+[08/14/2023 02:09:34 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 02:09:35 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 02:09:35 PM INFO]:Delete D8
+[08/14/2023 02:09:35 PM INFO]:Write VBAK to dfMain
+[08/14/2023 02:09:35 PM INFO]:Write VBAP to dfMain
+[08/14/2023 02:09:35 PM INFO]:Write LIPS to dfMain
+[08/14/2023 02:09:35 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 02:09:35 PM INFO]:Append ZEER to dfMain
+[08/14/2023 02:09:35 PM INFO]:Write Customer List to dfMain
+[08/14/2023 02:09:35 PM INFO]:Write Price List to dfMain
+[08/14/2023 02:09:35 PM INFO]:Fill in dfMain
+[08/14/2023 02:09:35 PM INFO]:Format dfMain
+[08/14/2023 02:09:46 PM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
+[08/14/2023 02:09:46 PM INFO]:Total run time is 23s
+[08/14/2023 02:13:20 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 02:13:30 PM INFO]:Files have been read to dataframe
+[08/14/2023 02:13:31 PM INFO]:Append ZDER to dfMain
+[08/14/2023 02:13:31 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 02:13:32 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 02:13:32 PM INFO]:Delete D8
+[08/14/2023 02:13:32 PM INFO]:Write VBAK to dfMain
+[08/14/2023 02:13:32 PM INFO]:Write VBAP to dfMain
+[08/14/2023 02:13:32 PM INFO]:Write LIPS to dfMain
+[08/14/2023 02:13:32 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 02:13:32 PM INFO]:Append ZEER to dfMain
+[08/14/2023 02:13:32 PM INFO]:Write Customer List to dfMain
+[08/14/2023 02:13:33 PM INFO]:Write Price List to dfMain
+[08/14/2023 02:13:33 PM INFO]:Fill in dfMain
+[08/14/2023 02:13:33 PM INFO]:Format dfMain
+[08/14/2023 02:13:42 PM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
+[08/14/2023 02:13:42 PM INFO]:Total run time is 22s
+[08/14/2023 02:19:36 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 02:20:01 PM INFO]:Files have been read to dataframe
+[08/14/2023 02:20:01 PM INFO]:Append ZDER to dfMain
+[08/14/2023 02:20:01 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 02:20:05 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 02:20:05 PM INFO]:Delete D8
+[08/14/2023 02:20:05 PM INFO]:Write VBAK to dfMain
+[08/14/2023 02:20:05 PM INFO]:Write VBAP to dfMain
+[08/14/2023 02:20:05 PM INFO]:Write LIPS to dfMain
+[08/14/2023 02:20:06 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 02:20:06 PM INFO]:Append ZEER to dfMain
+[08/14/2023 02:20:06 PM INFO]:Write Customer List to dfMain
+[08/14/2023 02:20:06 PM INFO]:Write Price List to dfMain
+[08/14/2023 02:20:06 PM INFO]:Fill in dfMain
+[08/14/2023 02:20:06 PM INFO]:Format dfMain
+[08/14/2023 02:21:48 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 02:23:50 PM INFO]:Files have been read to dataframe
+[08/14/2023 02:23:50 PM INFO]:Append ZDER to dfMain
+[08/14/2023 02:45:37 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 02:48:06 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 02:48:44 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 02:48:44 PM DEBUG]:Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 567, in Main
+    self.CombineDataLogic()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 501, in CombineDataLogic
+    self.ReadFilesToDataFrame()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 64, in ReadFilesToDataFrame
+    self.dfZDER = PandasUtils.GetDataFrame(self.mainFolder, 'ZDER.xlsx', 'Sheet1')
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 22, in GetDataFrame
+    df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str',parse_dates=parseDatesList, dayfirst=isDayFirst)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\util\_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+TypeError: read_excel() got an unexpected keyword argument 'dayfirst'
+
+[08/14/2023 02:55:45 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 02:55:59 PM DEBUG]:Traceback (most recent call last):
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1039, in converter
+    date_parser(*date_cols), errors="ignore", cache=cache_dates
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 38, in DateParser
+    return datetime.strptime(dateString, '%Y-%m-%d')
+TypeError: strptime() argument 1 must be str, not numpy.ndarray
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1050, in converter
+    dayfirst=dayfirst,
+  File "pandas\_libs\tslibs\parsing.pyx", line 632, in pandas._libs.tslibs.parsing.try_parse_dates
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 38, in DateParser
+    return datetime.strptime(dateString, '%Y-%m-%d')
+  File "C:\Program Files\Python37\lib\_strptime.py", line 577, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Program Files\Python37\lib\_strptime.py", line 362, in _strptime
+    data_string[found.end():])
+ValueError: unconverted data remains:  00:00:00
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 567, in Main
+    self.CombineDataLogic()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 501, in CombineDataLogic
+    self.ReadFilesToDataFrame()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 74, in ReadFilesToDataFrame
+    self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'VBAK', parseDatesList=['ERDAT', 'AUDAT'], isDayFirst=True)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 23, in GetDataFrame
+    df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str',parse_dates=parseDatesList, date_parser=PandasUtils.DateParser)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\util\_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 395, in read_excel
+    mangle_dupe_cols=mangle_dupe_cols,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 1292, in parse
+    **kwds,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 627, in parse
+    output[asheetname] = parser.read(nrows=nrows)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\readers.py", line 1047, in read
+    index, columns, col_dict = self._engine.read(nrows)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\python_parser.py", line 281, in read
+    columns, data = self._do_date_conversions(columns, data)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 802, in _do_date_conversions
+    keep_date_col=self.keep_date_col,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1093, in _process_date_conversion
+    data_dict[colspec] = converter(data_dict[colspec])
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1055, in converter
+    return generic_parser(date_parser, *date_cols)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\date_converters.py", line 100, in generic_parser
+    results[i] = parse_func(*args)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 38, in DateParser
+    return datetime.strptime(dateString, '%Y-%m-%d')
+TypeError: strptime() argument 1 must be str, not datetime.datetime
+
+[08/14/2023 02:59:03 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 02:59:11 PM DEBUG]:Traceback (most recent call last):
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1039, in converter
+    date_parser(*date_cols), errors="ignore", cache=cache_dates
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 37, in DateParser
+    return datetime.strptime(dateString, '%m/%d/%Y')
+TypeError: strptime() argument 1 must be str, not numpy.ndarray
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1050, in converter
+    dayfirst=dayfirst,
+  File "pandas\_libs\tslibs\parsing.pyx", line 632, in pandas._libs.tslibs.parsing.try_parse_dates
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 37, in DateParser
+    return datetime.strptime(dateString, '%m/%d/%Y')
+  File "C:\Program Files\Python37\lib\_strptime.py", line 577, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Program Files\Python37\lib\_strptime.py", line 359, in _strptime
+    (data_string, format))
+ValueError: time data '2023-11-08 00:00:00' does not match format '%m/%d/%Y'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 567, in Main
+    self.CombineDataLogic()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 501, in CombineDataLogic
+    self.ReadFilesToDataFrame()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 74, in ReadFilesToDataFrame
+    self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'VBAK', parseDatesList=['ERDAT', 'AUDAT'], isDayFirst=True)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 22, in GetDataFrame
+    df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str',parse_dates=parseDatesList, date_parser=PandasUtils.DateParser)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\util\_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 395, in read_excel
+    mangle_dupe_cols=mangle_dupe_cols,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 1292, in parse
+    **kwds,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 627, in parse
+    output[asheetname] = parser.read(nrows=nrows)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\readers.py", line 1047, in read
+    index, columns, col_dict = self._engine.read(nrows)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\python_parser.py", line 281, in read
+    columns, data = self._do_date_conversions(columns, data)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 802, in _do_date_conversions
+    keep_date_col=self.keep_date_col,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1093, in _process_date_conversion
+    data_dict[colspec] = converter(data_dict[colspec])
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1055, in converter
+    return generic_parser(date_parser, *date_cols)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\date_converters.py", line 100, in generic_parser
+    results[i] = parse_func(*args)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 37, in DateParser
+    return datetime.strptime(dateString, '%m/%d/%Y')
+TypeError: strptime() argument 1 must be str, not datetime.datetime
+
+[08/14/2023 03:00:19 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 03:00:29 PM DEBUG]:Traceback (most recent call last):
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1039, in converter
+    date_parser(*date_cols), errors="ignore", cache=cache_dates
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 37, in DateParser
+    return datetime.strptime(str(dateString), '%m/%d/%Y')
+  File "C:\Program Files\Python37\lib\_strptime.py", line 577, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Program Files\Python37\lib\_strptime.py", line 359, in _strptime
+    (data_string, format))
+ValueError: time data '[datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)]' does not match format '%m/%d/%Y'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1050, in converter
+    dayfirst=dayfirst,
+  File "pandas\_libs\tslibs\parsing.pyx", line 632, in pandas._libs.tslibs.parsing.try_parse_dates
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 37, in DateParser
+    return datetime.strptime(str(dateString), '%m/%d/%Y')
+  File "C:\Program Files\Python37\lib\_strptime.py", line 577, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Program Files\Python37\lib\_strptime.py", line 359, in _strptime
+    (data_string, format))
+ValueError: time data '2023-11-08 00:00:00' does not match format '%m/%d/%Y'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 567, in Main
+    self.CombineDataLogic()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 501, in CombineDataLogic
+    self.ReadFilesToDataFrame()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 74, in ReadFilesToDataFrame
+    self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'VBAK', parseDatesList=['ERDAT', 'AUDAT'], isDayFirst=True)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 22, in GetDataFrame
+    df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str',parse_dates=parseDatesList, date_parser=PandasUtils.DateParser)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\util\_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 395, in read_excel
+    mangle_dupe_cols=mangle_dupe_cols,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 1292, in parse
+    **kwds,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 627, in parse
+    output[asheetname] = parser.read(nrows=nrows)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\readers.py", line 1047, in read
+    index, columns, col_dict = self._engine.read(nrows)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\python_parser.py", line 281, in read
+    columns, data = self._do_date_conversions(columns, data)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 802, in _do_date_conversions
+    keep_date_col=self.keep_date_col,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1093, in _process_date_conversion
+    data_dict[colspec] = converter(data_dict[colspec])
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1055, in converter
+    return generic_parser(date_parser, *date_cols)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\date_converters.py", line 100, in generic_parser
+    results[i] = parse_func(*args)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 37, in DateParser
+    return datetime.strptime(str(dateString), '%m/%d/%Y')
+  File "C:\Program Files\Python37\lib\_strptime.py", line 577, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Program Files\Python37\lib\_strptime.py", line 359, in _strptime
+    (data_string, format))
+ValueError: time data '2023-11-08 00:00:00' does not match format '%m/%d/%Y'
+
+[08/14/2023 03:03:22 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 03:03:33 PM DEBUG]:Traceback (most recent call last):
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1039, in converter
+    date_parser(*date_cols), errors="ignore", cache=cache_dates
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 37, in DateParser
+    return datetime.strptime(str(dateString), '%Y-%d-%m')
+  File "C:\Program Files\Python37\lib\_strptime.py", line 577, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Program Files\Python37\lib\_strptime.py", line 359, in _strptime
+    (data_string, format))
+ValueError: time data '[datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)\n datetime.datetime(2023, 11, 8, 0, 0) datetime.datetime(2023, 11, 8, 0, 0)]' does not match format '%Y-%d-%m'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1050, in converter
+    dayfirst=dayfirst,
+  File "pandas\_libs\tslibs\parsing.pyx", line 632, in pandas._libs.tslibs.parsing.try_parse_dates
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 37, in DateParser
+    return datetime.strptime(str(dateString), '%Y-%d-%m')
+  File "C:\Program Files\Python37\lib\_strptime.py", line 577, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Program Files\Python37\lib\_strptime.py", line 362, in _strptime
+    data_string[found.end():])
+ValueError: unconverted data remains:  00:00:00
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 567, in Main
+    self.CombineDataLogic()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 501, in CombineDataLogic
+    self.ReadFilesToDataFrame()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 74, in ReadFilesToDataFrame
+    self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'VBAK', parseDatesList=['ERDAT', 'AUDAT'], isDayFirst=True)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 22, in GetDataFrame
+    df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str',parse_dates=parseDatesList, date_parser=PandasUtils.DateParser)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\util\_decorators.py", line 311, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 395, in read_excel
+    mangle_dupe_cols=mangle_dupe_cols,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 1292, in parse
+    **kwds,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\excel\_base.py", line 627, in parse
+    output[asheetname] = parser.read(nrows=nrows)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\readers.py", line 1047, in read
+    index, columns, col_dict = self._engine.read(nrows)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\python_parser.py", line 281, in read
+    columns, data = self._do_date_conversions(columns, data)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 802, in _do_date_conversions
+    keep_date_col=self.keep_date_col,
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1093, in _process_date_conversion
+    data_dict[colspec] = converter(data_dict[colspec])
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\parsers\base_parser.py", line 1055, in converter
+    return generic_parser(date_parser, *date_cols)
+  File "C:\Program Files\Python37\lib\site-packages\pandas\io\date_converters.py", line 100, in generic_parser
+    results[i] = parse_func(*args)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 37, in DateParser
+    return datetime.strptime(str(dateString), '%Y-%d-%m')
+  File "C:\Program Files\Python37\lib\_strptime.py", line 577, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "C:\Program Files\Python37\lib\_strptime.py", line 362, in _strptime
+    data_string[found.end():])
+ValueError: unconverted data remains:  00:00:00
+
+[08/14/2023 03:05:26 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 03:06:55 PM INFO]:Files have been read to dataframe
+[08/14/2023 03:06:55 PM INFO]:Append ZDER to dfMain
+[08/14/2023 03:06:55 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 03:06:59 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 03:06:59 PM INFO]:Delete D8
+[08/14/2023 03:06:59 PM INFO]:Write VBAK to dfMain
+[08/14/2023 03:06:59 PM INFO]:Write VBAP to dfMain
+[08/14/2023 03:06:59 PM INFO]:Write LIPS to dfMain
+[08/14/2023 03:06:59 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 03:06:59 PM INFO]:Append ZEER to dfMain
+[08/14/2023 03:06:59 PM INFO]:Write Customer List to dfMain
+[08/14/2023 03:06:59 PM INFO]:Write Price List to dfMain
+[08/14/2023 03:06:59 PM INFO]:Fill in dfMain
+[08/14/2023 03:06:59 PM INFO]:Format dfMain
+[08/14/2023 03:07:25 PM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
+[08/14/2023 03:07:25 PM INFO]:Total run time is 119s
+[08/14/2023 03:08:56 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 03:09:08 PM INFO]:Files have been read to dataframe
+[08/14/2023 03:09:08 PM INFO]:Append ZDER to dfMain
+[08/14/2023 03:09:08 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 03:09:09 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 03:09:09 PM INFO]:Delete D8
+[08/14/2023 03:09:09 PM INFO]:Write VBAK to dfMain
+[08/14/2023 03:09:09 PM INFO]:Write VBAP to dfMain
+[08/14/2023 03:09:09 PM INFO]:Write LIPS to dfMain
+[08/14/2023 03:09:09 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 03:09:09 PM INFO]:Append ZEER to dfMain
+[08/14/2023 03:09:09 PM INFO]:Write Customer List to dfMain
+[08/14/2023 03:09:09 PM INFO]:Write Price List to dfMain
+[08/14/2023 03:09:09 PM INFO]:Fill in dfMain
+[08/14/2023 03:09:09 PM INFO]:Format dfMain
+[08/14/2023 03:09:20 PM DEBUG]:Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\ExcelUtils.py", line 121, in SaveXlsxWings
+    wk.save(newFilePath)
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\main.py", line 1065, in save
+    self.impl.save(path, password=password)
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\_xlwindows.py", line 839, in save
+    os.path.realpath(path), FileFormat=file_format, Password=password
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\_xlwindows.py", line 104, in __call__
+    v = self.__method(*args, **kwargs)
+  File "C:\Users\TANGK~1.5\AppData\Local\Temp\gen_py\3.7\00020813-0000-0000-C000-000000000046x0x1x9\_Workbook.py", line 288, in SaveAs
+    , Local, WorkIdentity)
+pywintypes.com_error: (-2147352567, 'Exception occurred.', (0, 'Microsoft Excel', "Cannot access 'W1 Daily SAMBC Report 20230814.xlsx'.", 'xlmain11.chm', 0, -2146827284), None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 567, in Main
+    self.CombineDataLogic()
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 546, in CombineDataLogic
+    strDailyReportName = self.GenerateDailyReport()
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 497, in GenerateDailyReport
+    ExcelUtils(filePath).SaveXlsxWings('Sheet1', strDailyReportName, self.dfMain)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\ExcelUtils.py", line 127, in SaveXlsxWings
+    raise Exception(strE)
+Exception: Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\ExcelUtils.py", line 121, in SaveXlsxWings
+    wk.save(newFilePath)
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\main.py", line 1065, in save
+    self.impl.save(path, password=password)
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\_xlwindows.py", line 839, in save
+    os.path.realpath(path), FileFormat=file_format, Password=password
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\_xlwindows.py", line 104, in __call__
+    v = self.__method(*args, **kwargs)
+  File "C:\Users\TANGK~1.5\AppData\Local\Temp\gen_py\3.7\00020813-0000-0000-C000-000000000046x0x1x9\_Workbook.py", line 288, in SaveAs
+    , Local, WorkIdentity)
+pywintypes.com_error: (-2147352567, 'Exception occurred.', (0, 'Microsoft Excel', "Cannot access 'W1 Daily SAMBC Report 20230814.xlsx'.", 'xlmain11.chm', 0, -2146827284), None)
+
+
+[08/14/2023 03:09:51 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 03:10:02 PM INFO]:Files have been read to dataframe
+[08/14/2023 03:10:02 PM INFO]:Append ZDER to dfMain
+[08/14/2023 03:10:02 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 03:10:03 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 03:10:03 PM INFO]:Delete D8
+[08/14/2023 03:10:04 PM INFO]:Write VBAK to dfMain
+[08/14/2023 03:10:04 PM INFO]:Write VBAP to dfMain
+[08/14/2023 03:10:04 PM INFO]:Write LIPS to dfMain
+[08/14/2023 03:10:04 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 03:10:04 PM INFO]:Append ZEER to dfMain
+[08/14/2023 03:10:04 PM INFO]:Write Customer List to dfMain
+[08/14/2023 03:10:04 PM INFO]:Write Price List to dfMain
+[08/14/2023 03:10:04 PM INFO]:Fill in dfMain
+[08/14/2023 03:10:04 PM INFO]:Format dfMain
+[08/14/2023 03:10:15 PM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
+[08/14/2023 03:10:15 PM INFO]:Total run time is 23s

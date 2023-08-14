@@ -71,7 +71,7 @@ class SAMBCOptimization:
         self.dfZCCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZCCR.xlsx', 'Sheet1')
 
         # 读取dfVBAK
-        self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'VBAK')
+        self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'VBAK', parseDatesList=['ERDAT', 'AUDAT'])
 
         # 读取dfVBAP
         self.dfVBAP = PandasUtils.GetDataFrame(self.mainFolder, 'VBAP.csv', 'VBAP')
@@ -460,9 +460,9 @@ class SAMBCOptimization:
 
     def FormatDfMain(self):
         # 订单生成日，分货日，到货日的格式改为yyyy/MM/dd
-        self.dfMain['订单生成日'] = self.dfMain['订单生成日'].str.slice(0, 10).str.replace('-', '/')
-        self.dfMain['分货日'] = self.dfMain['分货日'].str.slice(0, 10).str.replace('-', '/')
-        self.dfMain['到货日'] = self.dfMain['到货日'].str.slice(0, 10).str.replace('-', '/')
+        # self.dfMain['订单生成日'] = self.dfMain['订单生成日'].str.slice(0, 10).str.replace('-', '/')
+        # self.dfMain['分货日'] = self.dfMain['分货日'].str.slice(0, 10).str.replace('-', '/')
+        # self.dfMain['到货日'] = self.dfMain['到货日'].str.slice(0, 10).str.replace('-', '/')
 
         # 宝洁订单号去除前置0
         self.dfMain['宝洁订单号'] = self.dfMain['宝洁订单号'].str.lstrip('0')

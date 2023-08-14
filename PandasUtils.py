@@ -2,6 +2,7 @@ import os
 import json
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 
 class PandasUtils:
@@ -9,15 +10,16 @@ class PandasUtils:
         pass
 
     @staticmethod
-    def GetDataFrame(folder, fileName, sheetName):
+    def GetDataFrame(folder, fileName, sheetName, **kwargs):
         df = None
+        parseDatesList = None if kwargs.get('parseDatesList') is None else kwargs.get('parseDatesList')
         filePath = os.path.join(folder, fileName)
         fileName, extension = os.path.splitext(os.path.basename(filePath))
         if not os.path.exists(filePath):
             return None
 
         if '.xls' in extension:
-            df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str')
+            df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str',parse_dates=parseDatesList, date_parser=PandasUtils.DateParser)
         elif '.csv' in extension:
             df = pd.read_csv(filePath, dtype='str')
         else:
@@ -29,6 +31,10 @@ class PandasUtils:
     @staticmethod
     def GetFieldList(df):
         return df.columns.to_list()
+
+    @staticmethod
+    def DateParser(dateString):
+         return datetime.strptime(str(dateString), '%Y-%d-%m %H:%M:%S')
 
     @staticmethod
     # columnList         --> df中所有的column列表

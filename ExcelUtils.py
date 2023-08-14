@@ -108,6 +108,13 @@ class ExcelUtils:
             # 设置列的单元格格式为文本（字符串）
             columnRange.number_format = '@'
 
+            # # 获取E、F、G列的范围
+            # dateColumnRange = st.range('E:E,F:F,G:G')
+
+            # # 设置列的单元格格式为日期格式
+            # dateColumnRange.number_format = 'yyyy/MM/dd'
+
+
             st.range('A2').value = df.values
             
             wk.api.RefreshAll()
