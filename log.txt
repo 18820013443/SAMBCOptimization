@@ -307,3 +307,20 @@ ValueError: You are trying to merge on float64 and object columns. If you wish t
 [08/10/2023 07:00:52 PM INFO]:Format dfMain
 [08/10/2023 07:01:04 PM INFO]:Generate report GBJ Daily SAMBC Report 20230808.xlsx
 [08/10/2023 07:01:04 PM INFO]:Total run time is 98s
+[08/10/2023 07:23:43 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'GBJ', 'strDocumentDate': '08.08.2023'}
+[08/10/2023 07:24:25 PM INFO]:Files have been read to dataframe
+[08/10/2023 07:24:25 PM INFO]:Append ZDER to dfMain
+[08/10/2023 07:24:25 PM INFO]:Insert ZOCR to dfMain
+[08/10/2023 07:26:05 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/10/2023 07:26:06 PM INFO]:Delete D8
+[08/10/2023 07:26:06 PM INFO]:Write VBAK to dfMain
+[08/10/2023 07:26:06 PM INFO]:Write VBAP to dfMain
+[08/10/2023 07:26:06 PM INFO]:Write LIPS to dfMain
+[08/10/2023 07:26:06 PM INFO]:Write Open Allotment to dfMain
+[08/10/2023 07:26:06 PM INFO]:Append ZEER to dfMain
+[08/10/2023 07:26:06 PM INFO]:Write Customer List to dfMain
+[08/10/2023 07:26:06 PM INFO]:Write Price List to dfMain
+[08/10/2023 07:26:06 PM INFO]:Fill in dfMain
+[08/10/2023 07:26:06 PM INFO]:Format dfMain
+[08/10/2023 07:26:24 PM INFO]:Generate report GBJ Daily SAMBC Report 20230808.xlsx
+[08/10/2023 07:26:24 PM INFO]:Total run time is 160s
