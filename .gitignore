@@ -3,3 +3,6 @@ __pycahe__
 compare.py
 diff.xlsx
 log.txt
+*.xlsx
+*.xls
+*.csv

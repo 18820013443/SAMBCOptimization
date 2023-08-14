@@ -100,7 +100,16 @@ class ExcelUtils:
             app = xw.App(visible=False)
             wk = app.books.open(self.filePath)
             # wk.sheets[sheetName].range('A2').api.PasteSpecial()
-            wk.sheets[sheetName].range('A2').value = df.values
+            st = wk.sheets[sheetName]
+
+            # 获取AG列的范围
+            columnRange = st.range('AG:AG')
+
+            # 设置列的单元格格式为文本（字符串）
+            columnRange.number_format = '@'
+
+            st.range('A2').value = df.values
+            
             wk.api.RefreshAll()
             wk.save(newFilePath)
             wk.close()

@@ -588,8 +588,8 @@ if __name__ == '__main__':
 
         # 测试配置
         isJIT = False
-        marketName = 'GBJ'
-        strDocumentDate = '08.08.2023'
+        marketName = 'W1'
+        strDocumentDate = '14.08.2023'
 
     # 实例化对象并且执行Main方法
     obj = SAMBCOptimization(isJIT, marketName, strDocumentDate)
