@@ -363,7 +363,7 @@ class SAMBCOptimization:
         if self.dfLIPS is None:
             return
 
-        dfLIPSNotNull = self.dfLIPS.loc[self.dfLIPS['NewLFIMG'].notnull()]
+        dfLIPSNotNull = self.dfLIPS.loc[self.dfLIPS['NewMaterial'].notnull()]
 
         PandasUtils.UpdateDfMainFromDfOther(self.dfMain, dfLIPSNotNull,
                                             ['交货号', '宝洁产品代码'],
