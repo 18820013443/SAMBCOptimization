@@ -200,7 +200,13 @@ class SAMBCOptimization:
             if reasonCode == '01':
                 row['未满足原因代码'] = '01'
             else:
-                row['未满足原因代码'] = '07'
+                # 如果包含'07'那么reason code = 07
+                if '07' in dfZCCRCutReason['Rsn. Code'].values:
+                    row['未满足原因代码'] = '07'
+
+                # 否则就是最大值的reason code
+                else:
+                    row['未满足原因代码'] = reasonCode
         # 绝对值的最大值不是是唯一
         else:
             # reasonCode = PandasUtils.FindReasonCodeForMaxAbsValue(maxAbsValue, dfZCCRCutReasonNew)

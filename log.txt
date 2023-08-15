@@ -737,3 +737,169 @@ pywintypes.com_error: (-2147352567, 'Exception occurred.', (0, 'Microsoft Excel'
 [08/14/2023 03:10:04 PM INFO]:Format dfMain
 [08/14/2023 03:10:15 PM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
 [08/14/2023 03:10:15 PM INFO]:Total run time is 23s
+[08/14/2023 03:15:26 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 03:15:50 PM INFO]:Files have been read to dataframe
+[08/14/2023 03:15:50 PM INFO]:Append ZDER to dfMain
+[08/14/2023 03:15:51 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 03:15:54 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 03:15:54 PM INFO]:Delete D8
+[08/14/2023 03:15:54 PM INFO]:Write VBAK to dfMain
+[08/14/2023 03:45:11 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 03:45:21 PM INFO]:Files have been read to dataframe
+[08/14/2023 03:45:21 PM INFO]:Append ZDER to dfMain
+[08/14/2023 03:45:21 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 03:45:24 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 03:45:24 PM INFO]:Delete D8
+[08/14/2023 03:45:24 PM INFO]:Write VBAK to dfMain
+[08/14/2023 03:45:24 PM INFO]:Write VBAP to dfMain
+[08/14/2023 03:45:24 PM INFO]:Write LIPS to dfMain
+[08/14/2023 03:45:24 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 03:45:24 PM INFO]:Append ZEER to dfMain
+[08/14/2023 03:45:24 PM INFO]:Write Customer List to dfMain
+[08/14/2023 03:45:24 PM INFO]:Write Price List to dfMain
+[08/14/2023 03:45:24 PM INFO]:Fill in dfMain
+[08/14/2023 03:45:24 PM INFO]:Format dfMain
+[08/14/2023 03:45:35 PM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
+[08/14/2023 03:45:35 PM INFO]:Total run time is 24s
+[08/14/2023 03:49:44 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 03:49:53 PM INFO]:Files have been read to dataframe
+[08/14/2023 03:49:53 PM INFO]:Append ZDER to dfMain
+[08/14/2023 03:49:53 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 03:49:55 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 03:49:55 PM INFO]:Delete D8
+[08/14/2023 03:49:55 PM INFO]:Write VBAK to dfMain
+[08/14/2023 03:49:55 PM INFO]:Write VBAP to dfMain
+[08/14/2023 03:49:55 PM INFO]:Write LIPS to dfMain
+[08/14/2023 03:49:55 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 03:49:55 PM INFO]:Append ZEER to dfMain
+[08/14/2023 03:49:55 PM INFO]:Write Customer List to dfMain
+[08/14/2023 03:49:55 PM INFO]:Write Price List to dfMain
+[08/14/2023 03:49:55 PM INFO]:Fill in dfMain
+[08/14/2023 03:49:55 PM INFO]:Format dfMain
+[08/14/2023 03:50:04 PM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
+[08/14/2023 03:50:04 PM INFO]:Total run time is 19s
+[08/14/2023 04:32:09 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 04:32:29 PM INFO]:Files have been read to dataframe
+[08/14/2023 04:32:29 PM INFO]:Append ZDER to dfMain
+[08/14/2023 04:32:29 PM DEBUG]:Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 567, in Main
+    self.CombineDataLogic()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 507, in CombineDataLogic
+    self.InsertZocrOrderValueToDfMain()
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\SAMBCOptimization.py", line 143, in InsertZocrOrderValueToDfMain
+    ['Order Value'])
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\PandasUtils.py", line 97, in UpdateDfMainFromDfOther
+    dfMain[fill_column] = merged_df[fill_column + '_other'].combine_first(merged_df[fill_column])
+TypeError: can only concatenate list (not "str") to list
+
+[08/14/2023 04:33:15 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 04:33:38 PM INFO]:Files have been read to dataframe
+[08/14/2023 04:33:38 PM INFO]:Append ZDER to dfMain
+[08/14/2023 04:33:38 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 04:33:42 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 04:33:42 PM INFO]:Delete D8
+[08/14/2023 04:33:42 PM INFO]:Write VBAK to dfMain
+[08/14/2023 05:10:53 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/14/2023 05:11:05 PM INFO]:Files have been read to dataframe
+[08/14/2023 05:11:05 PM INFO]:Append ZDER to dfMain
+[08/14/2023 05:11:05 PM INFO]:Insert ZOCR to dfMain
+[08/14/2023 05:11:07 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/14/2023 05:11:07 PM INFO]:Delete D8
+[08/14/2023 05:11:07 PM INFO]:Write VBAK to dfMain
+[08/14/2023 05:11:07 PM INFO]:Write VBAP to dfMain
+[08/14/2023 05:11:07 PM INFO]:Write LIPS to dfMain
+[08/14/2023 05:11:07 PM INFO]:Write Open Allotment to dfMain
+[08/14/2023 05:11:07 PM INFO]:Append ZEER to dfMain
+[08/14/2023 05:11:07 PM INFO]:Write Customer List to dfMain
+[08/14/2023 05:11:07 PM INFO]:Write Price List to dfMain
+[08/14/2023 05:11:07 PM INFO]:Fill in dfMain
+[08/14/2023 05:11:07 PM INFO]:Format dfMain
+[08/14/2023 05:11:18 PM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
+[08/14/2023 05:11:18 PM INFO]:Total run time is 25s
+[08/15/2023 11:14:45 AM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/15/2023 11:14:59 AM INFO]:Files have been read to dataframe
+[08/15/2023 11:15:00 AM INFO]:Append ZDER to dfMain
+[08/15/2023 11:15:00 AM INFO]:Insert ZOCR to dfMain
+[08/15/2023 11:15:02 AM INFO]:Write ZCCR Cut Reason to dfMain
+[08/15/2023 11:15:02 AM INFO]:Delete D8
+[08/15/2023 11:15:02 AM INFO]:Write VBAK to dfMain
+[08/15/2023 11:15:02 AM INFO]:Write VBAP to dfMain
+[08/15/2023 11:15:02 AM INFO]:Write LIPS to dfMain
+[08/15/2023 11:15:02 AM INFO]:Write Open Allotment to dfMain
+[08/15/2023 11:15:02 AM INFO]:Append ZEER to dfMain
+[08/15/2023 11:15:02 AM INFO]:Write Customer List to dfMain
+[08/15/2023 11:15:02 AM INFO]:Write Price List to dfMain
+[08/15/2023 11:15:02 AM INFO]:Fill in dfMain
+[08/15/2023 11:15:02 AM INFO]:Format dfMain
+[08/15/2023 11:15:20 AM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
+[08/15/2023 11:15:20 AM INFO]:Total run time is 35s
+[08/15/2023 03:32:41 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/15/2023 03:32:55 PM INFO]:Files have been read to dataframe
+[08/15/2023 03:32:55 PM INFO]:Append ZDER to dfMain
+[08/15/2023 03:32:56 PM INFO]:Insert ZOCR to dfMain
+[08/15/2023 03:32:58 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/15/2023 03:32:58 PM INFO]:Delete D8
+[08/15/2023 03:32:58 PM INFO]:Write VBAK to dfMain
+[08/15/2023 03:32:58 PM INFO]:Write VBAP to dfMain
+[08/15/2023 03:32:58 PM INFO]:Write LIPS to dfMain
+[08/15/2023 03:32:58 PM INFO]:Write Open Allotment to dfMain
+[08/15/2023 03:32:58 PM INFO]:Append ZEER to dfMain
+[08/15/2023 03:32:58 PM INFO]:Write Customer List to dfMain
+[08/15/2023 03:32:58 PM INFO]:Write Price List to dfMain
+[08/15/2023 03:32:58 PM INFO]:Fill in dfMain
+[08/15/2023 03:32:58 PM INFO]:Format dfMain
+[08/15/2023 03:33:12 PM DEBUG]:Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\ExcelUtils.py", line 121, in SaveXlsxWings
+    wk.save(newFilePath)
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\main.py", line 1065, in save
+    self.impl.save(path, password=password)
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\_xlwindows.py", line 839, in save
+    os.path.realpath(path), FileFormat=file_format, Password=password
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\_xlwindows.py", line 104, in __call__
+    v = self.__method(*args, **kwargs)
+  File "C:\Users\TANGK~1.5\AppData\Local\Temp\gen_py\3.7\00020813-0000-0000-C000-000000000046x0x1x9\_Workbook.py", line 288, in SaveAs
+    , Local, WorkIdentity)
+pywintypes.com_error: (-2147352567, 'Exception occurred.', (0, 'Microsoft Excel', "Cannot access 'W1 Daily SAMBC Report 20230814.xlsx'.", 'xlmain11.chm', 0, -2146827284), None)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 575, in Main
+    self.CombineDataLogic()
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 554, in CombineDataLogic
+    strDailyReportName = self.GenerateDailyReport()
+  File "c:/Users/tang.k.5/OneDrive - Procter and Gamble/Desktop/Code Projects/SAMBCOptimization/SAMBCOptimization.py", line 505, in GenerateDailyReport
+    ExcelUtils(filePath).SaveXlsxWings('Sheet1', strDailyReportName, self.dfMain)
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\ExcelUtils.py", line 127, in SaveXlsxWings
+    raise Exception(strE)
+Exception: Traceback (most recent call last):
+  File "c:\Users\tang.k.5\OneDrive - Procter and Gamble\Desktop\Code Projects\SAMBCOptimization\ExcelUtils.py", line 121, in SaveXlsxWings
+    wk.save(newFilePath)
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\main.py", line 1065, in save
+    self.impl.save(path, password=password)
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\_xlwindows.py", line 839, in save
+    os.path.realpath(path), FileFormat=file_format, Password=password
+  File "C:\Program Files\Python37\lib\site-packages\xlwings\_xlwindows.py", line 104, in __call__
+    v = self.__method(*args, **kwargs)
+  File "C:\Users\TANGK~1.5\AppData\Local\Temp\gen_py\3.7\00020813-0000-0000-C000-000000000046x0x1x9\_Workbook.py", line 288, in SaveAs
+    , Local, WorkIdentity)
+pywintypes.com_error: (-2147352567, 'Exception occurred.', (0, 'Microsoft Excel', "Cannot access 'W1 Daily SAMBC Report 20230814.xlsx'.", 'xlmain11.chm', 0, -2146827284), None)
+
+
+[08/15/2023 03:33:49 PM INFO]:Start with paramaters: {'isJIT': False, 'marketName': 'W1', 'strDocumentDate': '14.08.2023'}
+[08/15/2023 03:34:00 PM INFO]:Files have been read to dataframe
+[08/15/2023 03:34:00 PM INFO]:Append ZDER to dfMain
+[08/15/2023 03:34:00 PM INFO]:Insert ZOCR to dfMain
+[08/15/2023 03:34:01 PM INFO]:Write ZCCR Cut Reason to dfMain
+[08/15/2023 03:34:01 PM INFO]:Delete D8
+[08/15/2023 03:34:01 PM INFO]:Write VBAK to dfMain
+[08/15/2023 03:34:01 PM INFO]:Write VBAP to dfMain
+[08/15/2023 03:34:01 PM INFO]:Write LIPS to dfMain
+[08/15/2023 03:34:01 PM INFO]:Write Open Allotment to dfMain
+[08/15/2023 03:34:01 PM INFO]:Append ZEER to dfMain
+[08/15/2023 03:34:01 PM INFO]:Write Customer List to dfMain
+[08/15/2023 03:34:01 PM INFO]:Write Price List to dfMain
+[08/15/2023 03:34:01 PM INFO]:Fill in dfMain
+[08/15/2023 03:34:01 PM INFO]:Format dfMain
+[08/15/2023 03:34:18 PM INFO]:Generate report W1 Daily SAMBC Report 20230814.xlsx
+[08/15/2023 03:34:18 PM INFO]:Total run time is 29s
