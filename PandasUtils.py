@@ -20,6 +20,7 @@ class PandasUtils:
 
         if '.xls' in extension:
             df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str',parse_dates=parseDatesList, date_parser=PandasUtils.DateParser)
+            # df = pd.read_excel(filePath, sheet_name=sheetName, engine='openpyxl', dtype='str')
         elif '.csv' in extension:
             df = pd.read_csv(filePath, dtype='str')
         else:
@@ -34,7 +35,7 @@ class PandasUtils:
 
     @staticmethod
     def DateParser(dateString):
-         return datetime.strptime(str(dateString), '%Y-%d-%m %H:%M:%S')
+         return datetime.strptime(str(dateString), '%d/%m/%Y %H:%M:%S')
 
     @staticmethod
     # columnList         --> df中所有的column列表

@@ -61,17 +61,18 @@ class SAMBCOptimization:
         self.dfMain = pd.DataFrame(columns=self.finalReportFieldList)
 
         # 读取dfZDER
-        self.dfZDER = PandasUtils.GetDataFrame(self.mainFolder, 'ZDER.xlsx', 'Sheet1')
+        # self.dfZDER = PandasUtils.GetDataFrame(self.mainFolder, 'ZDER.xlsx', 'Sheet1')
 
-        # 将ZOCR.xls转成ZOCR.xlsx，并且读取dfZOCR
-        ExcelUtils(os.path.join(self.mainFolder, 'ZOCR.xls')).ConvertXlsToXlsx()
-        self.dfZOCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZOCR.xlsx', 'ZOCR')
+        # # 将ZOCR.xls转成ZOCR.xlsx，并且读取dfZOCR
+        # ExcelUtils(os.path.join(self.mainFolder, 'ZOCR.xls')).ConvertXlsToXlsx()
+        # self.dfZOCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZOCR.xlsx', 'ZOCR')
 
-        # 读取dfZCCR
-        self.dfZCCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZCCR.xlsx', 'Sheet1')
+        # # 读取dfZCCR
+        # self.dfZCCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZCCR.xlsx', 'Sheet1')
 
         # 读取dfVBAK
-        self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'VBAK', parseDatesList=['ERDAT', 'AUDAT'])
+        self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'Sheet1', parseDatesList=['ERDAT', 'AUDAT'])
+        # self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'Sheet1')
 
         # 读取dfVBAP
         self.dfVBAP = PandasUtils.GetDataFrame(self.mainFolder, 'VBAP.csv', 'VBAP')
