@@ -187,6 +187,8 @@ class SAMBCOptimization:
             # 相加reason code相同的'Cut Quantity'的正负值
             dfZCCRCutReasonNew = PandasUtils.SumQtyForSameReasonCode(dfZCCRCutReasonRemoveValues)
         else:
+            # 删除有同样数量和同样reason code的正负值的记录
+            dfZCCRCutReasonRemoveValues = PandasUtils.DeleteDuplicatedAbsRows(dfGrouped)
             # 相加reason code相同的'Cut Quantity'的正负值
             dfZCCRCutReasonNew = PandasUtils.SumQtyForSameReasonCode(dfZCCRCutReason)
         # 判断‘Cut Quantity’ 绝对值的最大值是否唯一
@@ -201,7 +203,7 @@ class SAMBCOptimization:
                 row['未满足原因代码'] = '01'
             else:
                 # 如果包含'07'那么reason code = 07
-                if '07' in dfZCCRCutReason['Rsn. Code'].values:
+                if '07' in dfZCCRCutReasonNew['Rsn. Code'].values:
                     row['未满足原因代码'] = '07'
 
                 # 否则就是最大值的reason code
@@ -596,8 +598,8 @@ if __name__ == '__main__':
 
         # 测试配置
         isJIT = False
-        marketName = 'W1'
-        strDocumentDate = '14.08.2023'
+        marketName = 'GBJ'
+        strDocumentDate = '16.08.2023'
 
     # 实例化对象并且执行Main方法
     obj = SAMBCOptimization(isJIT, marketName, strDocumentDate)
