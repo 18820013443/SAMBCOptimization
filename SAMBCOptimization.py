@@ -61,14 +61,14 @@ class SAMBCOptimization:
         self.dfMain = pd.DataFrame(columns=self.finalReportFieldList)
 
         # 读取dfZDER
-        # self.dfZDER = PandasUtils.GetDataFrame(self.mainFolder, 'ZDER.xlsx', 'Sheet1')
+        self.dfZDER = PandasUtils.GetDataFrame(self.mainFolder, 'ZDER.xlsx', 'Sheet1')
 
-        # # 将ZOCR.xls转成ZOCR.xlsx，并且读取dfZOCR
-        # ExcelUtils(os.path.join(self.mainFolder, 'ZOCR.xls')).ConvertXlsToXlsx()
-        # self.dfZOCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZOCR.xlsx', 'ZOCR')
+        # 将ZOCR.xls转成ZOCR.xlsx，并且读取dfZOCR
+        ExcelUtils(os.path.join(self.mainFolder, 'ZOCR.xls')).ConvertXlsToXlsx()
+        self.dfZOCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZOCR.xlsx', 'ZOCR')
 
-        # # 读取dfZCCR
-        # self.dfZCCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZCCR.xlsx', 'Sheet1')
+        # 读取dfZCCR
+        self.dfZCCR = PandasUtils.GetDataFrame(self.mainFolder, 'ZCCR.xlsx', 'Sheet1')
 
         # 读取dfVBAK
         self.dfVBAK = PandasUtils.GetDataFrame(self.mainFolder, 'VBAK.xlsx', 'Sheet1', parseDatesList=['ERDAT', 'AUDAT'])
@@ -407,6 +407,10 @@ class SAMBCOptimization:
         self.dfMain['促销装配额开放日缺货Y/N'] = dfMerged['促销装配额开放日缺货Y/N']
 
     def AppedZeerToDfMain(self):
+
+        if self.dfZEER is None:
+            return
+
         dfFiltered = self.dfZEER.loc[(self.dfZEER['Drops Err Message'].isin(self.zeerScreenConditionList)) & (
                 self.dfZEER['Material Quantity'] != 0)]
 
