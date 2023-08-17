@@ -152,6 +152,9 @@ class SAMBCOptimization:
 
         # 计算未满足数量
         self.dfMain['未满足数量'] = pd.to_numeric(self.dfMain['下单数量']) - pd.to_numeric(self.dfMain['分货数量'])
+
+        # 当未满足数量为空时， 未满足原因代码为空
+        self.dfMain.loc[self.dfMain['未满足数量'].isnull(), '未满足原因代码'] = None
         pass
 
     def OnlyD4And07Operations(self, dfGrouped, dfZCCRCutReason, row):
