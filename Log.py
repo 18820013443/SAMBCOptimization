@@ -6,40 +6,51 @@ from YamlHandler import Settings
 
 
 class Log:
-    def __init__(self, level='DEBUG'):
-        self.log = logging.getLogger('KK')
-        self.log.setLevel(level)
-        strTimeZone = self.GetTimeZone()
-        self.timeZone = pytz.timezone(strTimeZone)
-        self.logPath = self.GetLogPath()
+    def __init__(self):
+        # 读取yaml中logging配置
+        config = Settings.get('logging')
 
-    def ConsoleHandle(self, level='DEBUG'):
+        # 获取并配置logging对象
+        self.log = logging.getLogger('KK')
+        self.logLevel = config.get('logLevel')
+        self.log.setLevel(self.logLevel)
+
+        # logging的配置
+        self.fmt = config.get('fmt')
+        self.dateFmt = config.get('dateFmt')
+        self.fileName = config.get('logFileName')
+        self.timeZone = pytz.timezone(config.get('timeZone'))
+        self.logPath = self.GetLogPath() if config.get('logPath') == '' else config.get('logPath')
+
+    def _ConsoleHandle(self):
         '''控制台处理器'''
         consoleHandler = logging.StreamHandler()
-        consoleHandler.setLevel(level)
+        consoleHandler.setLevel(self.logLevel)
         consoleHandler.setFormatter(self.GetFormatter()[0])
         consoleHandler.formatter.converter = lambda *args: datetime.datetime.now(self.timeZone).timetuple()
         return consoleHandler
 
-    def FileHandle(self, level='DEBUG'):
+    def _FileHandle(self):
         '''文件处理器'''
         fileHandler = logging.FileHandler(self.logPath, mode='a', encoding='utf-8')
-        fileHandler.setLevel(level)
+        fileHandler.setLevel(self.logLevel)
         fileHandler.setFormatter(self.GetFormatter()[1])
         fileHandler.formatter.converter = lambda *args: datetime.datetime.now(self.timeZone).timetuple()
         return fileHandler
 
     def GetFormatter(self):
         '''格式器'''
-        consoleFmt = logging.Formatter(fmt='[%(asctime)s %(levelname)s]:%(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-        fileFmt = logging.Formatter(fmt='[%(asctime)s %(levelname)s]:%(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+        # consoleFmt = logging.Formatter(fmt='[%(asctime)s %(levelname)s]:%(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+        # fileFmt = logging.Formatter(fmt='[%(asctime)s %(levelname)s]:%(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+        consoleFmt = logging.Formatter(self.fmt, self.dateFmt)
+        fileFmt = logging.Formatter(self.fmt, self.dateFmt)
         return consoleFmt, fileFmt
 
     def GetLog(self):
         '''日志器添加到控制台处理器'''
         if not self.log.handlers:
-            self.log.addHandler(self.ConsoleHandle())
-            self.log.addHandler(self.FileHandle())
+            self.log.addHandler(self._ConsoleHandle())
+            self.log.addHandler(self._FileHandle())
         return self.log
 
     def GetDirName(self):
@@ -49,19 +60,12 @@ class Log:
     
     def GetLogPath(self):
         dirName = self.GetDirName()
-        logPath = os.path.join(dirName, 'log.txt')
+        logPath = os.path.join(dirName, self.fileName)
         return logPath
 
-    def GetTimeZone(self):
-        # dirName = self.GetDirName()
-        # self.settings = YamlHandler(os.path.join(
-        #     dirName, 'config.yaml')).ReadYaml()
-        strTimeZone = Settings.config.get('timeZone')
-        return strTimeZone
-
+logger = Log().GetLog()
     
 if __name__ == '__main__':
     obj = Log()
-    print(obj.GetTimeZone())
 
 

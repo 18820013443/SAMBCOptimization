@@ -6,7 +6,8 @@ import time
 import os
 from YamlHandler import Settings
 from PandasUtils import PandasUtils
-from Log import Log
+# from Log import Log
+from Log import logger
 import traceback
 from datetime import datetime
 from ExcelUtils import ExcelUtils
@@ -14,15 +15,11 @@ from ExcelUtils import ExcelUtils
 
 class SAMBCOptimization:
     def __init__(self, isJIT, marketName, strDocumentDate) -> None:
-        # self.dirName = self.GetDirName()
-        self.dirName = Settings.GetDirName()
-        self.settings = Settings.config
+        self.dirName = self.GetDirName()
+        # self.dirName = Settings.GetDirName()
+        self.settings = Settings
         self.Initialize()
         self.dfMain = None
-
-        log = Log()
-        log.logPath = self.GetLogPath()
-        self.logger = log.GetLog()
 
         self.marketName = marketName
         self.isJIT = isJIT
@@ -30,15 +27,15 @@ class SAMBCOptimization:
         # self.mainFolder = '%s/Input Files' % os.getcwd() if self.isTestMode else os.getcwd()
         self.mainFolder = '%s/Input Files' % self.dirName if self.isTestMode else self.dirName
 
-    # def GetDirName(self):
-    #     scriptPath = os.path.abspath(__file__)
-    #     dirName = os.path.dirname(scriptPath)
-    #     return dirName
+    def GetDirName(self):
+        scriptPath = os.path.abspath(__file__)
+        dirName = os.path.dirname(scriptPath)
+        return dirName
     
-    def GetLogPath(self):
-        strLogPath = self.settings['logPath']
-        logPath = strLogPath if strLogPath != '' else os.path.join(self.dirName, 'log.txt')
-        return logPath
+    # def GetLogPath(self):
+    #     strLogPath = self.settings['logPath']
+    #     logPath = strLogPath if strLogPath != '' else os.path.join(self.dirName, 'log.txt')
+    #     return logPath
 
     def Initialize(self):
         # self.settings = YamlHandler(os.path.join(
@@ -321,8 +318,8 @@ class SAMBCOptimization:
             except Exception as e:
                 rowData = str(row.to_json(indent=2, force_ascii=False))
                 strE = traceback.format_exc()
-                # self.logger.debug(('Write ZCCR Cut Reason Error and the row data is: \n %s' % rowData).encode('utf8'))
-                self.logger.debug('Write ZCCR Cut Reason Error and the row data is: \n %s' % rowData)
+                # logger.debug(('Write ZCCR Cut Reason Error and the row data is: \n %s' % rowData).encode('utf8'))
+                logger.debug('Write ZCCR Cut Reason Error and the row data is: \n %s' % rowData)
                 raise Exception(e)
 
                     # --------------不存在59 End--------------#
@@ -514,52 +511,52 @@ class SAMBCOptimization:
 
     def CombineDataLogic(self):
         self.ReadFilesToDataFrame()
-        self.logger.info('Files have been read to dataframe')
+        logger.info('Files have been read to dataframe')
 
         self.AppendDfZderToDfMain()
-        self.logger.info('Append ZDER to dfMain')
+        logger.info('Append ZDER to dfMain')
 
         self.InsertZocrOrderValueToDfMain()
-        self.logger.info('Insert ZOCR to dfMain')
+        logger.info('Insert ZOCR to dfMain')
 
         self.WriteZccrCutReasonToDfMain()
-        self.logger.info('Write ZCCR Cut Reason to dfMain')
+        logger.info('Write ZCCR Cut Reason to dfMain')
 
         self.DfMainDeleteD8Records()
-        self.logger.info('Delete D8')
+        logger.info('Delete D8')
 
         self.WriteVBAKToDfMain()
-        self.logger.info('Write VBAK to dfMain')
+        logger.info('Write VBAK to dfMain')
 
         self.WriteVBAPToDfMain()
-        self.logger.info('Write VBAP to dfMain')
+        logger.info('Write VBAP to dfMain')
 
         self.WriteLIPSToDfMain()
-        self.logger.info('Write LIPS to dfMain')
+        logger.info('Write LIPS to dfMain')
 
         self.WriteOpenAllotmentToDfMain()
-        self.logger.info('Write Open Allotment to dfMain')
+        logger.info('Write Open Allotment to dfMain')
 
         self.AppedZeerToDfMain()
-        self.logger.info('Append ZEER to dfMain')
+        logger.info('Append ZEER to dfMain')
 
         self.WriteCustomerListToDfMain()
-        self.logger.info('Write Customer List to dfMain')
+        logger.info('Write Customer List to dfMain')
 
         self.WritePriceListToDfMain()
-        self.logger.info('Write Price List to dfMain')
+        logger.info('Write Price List to dfMain')
 
         self.FillInDfMain()
-        self.logger.info('Fill in dfMain')
+        logger.info('Fill in dfMain')
 
         self.FormatDfMain()
-        self.logger.info('Format dfMain')
+        logger.info('Format dfMain')
 
         # self.dfMain.to_excel('%s output.xlsx' % self.marketName, index=False)
-        # self.logger.info('Write %s output.xlsx' % self.marketName)
+        # logger.info('Write %s output.xlsx' % self.marketName)
 
         strDailyReportName = self.GenerateDailyReport()
-        self.logger.info('Generate report %s' % strDailyReportName)
+        logger.info('Generate report %s' % strDailyReportName)
         pass
 
     def Main(self):
@@ -575,22 +572,22 @@ class SAMBCOptimization:
         # dataJson = json.dumps(startParameters).encode('utf8')
         dataJson = str(startParameters)
 
-        # self.logger.info(('Start with paramaters: %s' % dataJson).encode('utf8'))
-        self.logger.info('Start with paramaters: %s' % dataJson)
+        # logger.info(('Start with paramaters: %s' % dataJson).encode('utf8'))
+        logger.info('Start with paramaters: %s' % dataJson)
 
         try:
             self.CombineDataLogic()
         except Exception as e:
             strE = traceback.format_exc()
-            self.logger.debug(strE)
+            logger.debug(strE)
             sys.exit(1)
         
-        self.logger.info('Total run time is %ds' % int(time.time() - timeStart))
+        logger.info('Total run time is %ds' % int(time.time() - timeStart))
 
 
 if __name__ == '__main__':
     
-    isTestMode = Settings.config.get('isTestMode')
+    isTestMode = Settings.get('isTestMode')
 
     if not isTestMode:
 

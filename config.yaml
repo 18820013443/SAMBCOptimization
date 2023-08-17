@@ -3,10 +3,13 @@ isTestMode:
   False
 
 # 日志路径
-logPath: ''
-
-# 日志时区timeZone
-timeZone: 'Asia/Shanghai'
+logging:
+  logPath: ''
+  logLevel: 'DEBUG'
+  fmt: '[%(asctime)s %(levelname)s]:%(message)s'
+  dateFmt: '%Y-%m-%d %I:%M:%S %p'
+  logFileName: 'log.txt'
+  timeZone: 'Asia/Shanghai' # 日志时区timeZone
 
 # ZDER要保留的栏位，以及要修改成对应的字段名
 zderRevisedColumns:

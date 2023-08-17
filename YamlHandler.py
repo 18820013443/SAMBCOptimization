@@ -21,5 +21,5 @@ class YamlHandler:
         dirName = os.path.dirname(scriptPath)
         return dirName
 
-Settings = YamlHandler()
+Settings = YamlHandler().config
 # yaml_data = YamlHandler(os.path.join(os.getcwd(), 'config.yaml')).ReadYaml()
