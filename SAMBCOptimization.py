@@ -152,9 +152,6 @@ class SAMBCOptimization:
 
         # 计算未满足数量
         self.dfMain['未满足数量'] = pd.to_numeric(self.dfMain['下单数量']) - pd.to_numeric(self.dfMain['分货数量'])
-
-        # 当未满足数量为空时， 未满足原因代码为空
-        self.dfMain.loc[self.dfMain['未满足数量'].isnull(), '未满足原因代码'] = None
         pass
 
     def OnlyD4And07Operations(self, dfGrouped, dfZCCRCutReason, row):
@@ -523,6 +520,12 @@ class SAMBCOptimization:
         # 软转换产品对应新码去除前置0
         self.dfMain['软转换产品对应新码'] = self.dfMain['软转换产品对应新码'].str.lstrip('0')
 
+                
+        # 当未满足数量为空时， 未满足原因代码为空
+        # self.dfMain.loc[self.dfMain['未满足数量'].isnull(), '未满足原因代码'] = None 输出是int32， 不是int64
+        self.dfMain['未满足数量'] = self.dfMain['未满足数量'].astype(int)
+        self.dfMain['未满足原因代码'] = self.dfMain['未满足原因代码'].astype('object')
+        self.dfMain.loc[self.dfMain['未满足数量'] == 0, '未满足原因代码'] = np.nan
         pass
 
     def GenerateDailyReport(self):
