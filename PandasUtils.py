@@ -59,7 +59,8 @@ class PandasUtils:
             if not columnName in reservedColumnList:
                 appendColumnList.append(columnName)
 
-        df[appendColumnList] = ""
+        # df[appendColumnList] = ""
+        return df
 
     @staticmethod
     # 将dfOther中的几列数据跟新到dfMain中
