@@ -268,7 +268,9 @@ class SAMBCOptimization:
 
         self.CalculateNotSatisfiedQty()
 
-        dfUnsatisfiedQty = self.dfMain.loc[(self.dfMain['未满足数量'] != np.nan) | (self.dfMain['未满足数量'] != 0)]
+        # self.dfMain['未满足数量'] = self.dfMain['未满足数量'].astype(int)
+        # dfUnsatisfiedQty = self.dfMain.loc[(self.dfMain['未满足数量'] != np.nan) | (self.dfMain['未满足数量'] != 0)]
+        dfUnsatisfiedQty = self.dfMain.loc[self.dfMain['未满足数量'] != 0]
         # dfUnsatisfiedQty = self.dfMain.loc[self.dfMain['未满足数量'] == 0]
 
         dfUnsatisfiedQty.drop_duplicates(subset=['宝洁订单号', '宝洁产品代码'], keep='first')
@@ -291,7 +293,8 @@ class SAMBCOptimization:
                 if dfZCCRCutReason.shape[0] == 1:
                     # row['未满足原因代码'] = dfZCCRCutReason.at[0, 'Rsn. Code']
                     row['未满足原因代码'] = dfZCCRCutReason.iloc[0]['Rsn. Code']
-                    dfUnsatisfiedQty.iloc[index] = row
+                    # dfUnsatisfiedQty.iloc[index] = row.copy()
+                    dfUnsatisfiedQty.loc[index] = row.copy()
                     continue
 
                 # ---------------------找到有多条记录Start---------------------#
@@ -302,7 +305,8 @@ class SAMBCOptimization:
                 # 如果存在59的记录，则赋值59，继续下一条
                 if dfCutReason59.shape[0] > 0:
                     row['未满足原因代码'] = '59'
-                    dfUnsatisfiedQty.iloc[index] = row
+                    # dfUnsatisfiedQty.iloc[index] = row.copy()
+                    dfUnsatisfiedQty.loc[index] = row.copy()
                     continue
 
                 # --------------不存在59 Start--------------#
@@ -346,7 +350,8 @@ class SAMBCOptimization:
                     else:
                         self.Contains04Operations(False, dfGrouped, dfZCCRCutReason, row)
 
-                dfUnsatisfiedQty.iloc[index] = row
+                # dfUnsatisfiedQty.iloc[index] = row.copy()
+                dfUnsatisfiedQty.loc[index] = row.copy()
             except Exception as e:
                 rowData = str(row.to_json(indent=2, force_ascii=False))
                 strE = traceback.format_exc()
