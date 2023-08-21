@@ -221,10 +221,42 @@ class SAMBCOptimization:
             return
 
         # Remove rows where '未满足原因代码' is equal to 'D8'
-        self.dfMain = self.dfMain[self.dfMain['未满足原因代码'] != 'D8']
+        # self.dfMain = self.dfMain[self.dfMain['未满足原因代码'] != 'D8']
 
         # Filter out rows where '客户订单号' contains 'xdc', '_xdc', or '.'
-        self.dfMain = self.dfMain[~self.dfMain['客户订单号'].str.contains('xdc|_xdc|\.')]
+        # self.dfMain = self.dfMain[~self.dfMain['客户订单号'].str.contains('xdc|_xdc|\.')]
+
+        # 用于记录要删除的index
+        deleteIndexList = []
+
+        # 遍历包含D8的记录，并且记录订单号包含xdc, _xdc, .的index
+        for index, row in dfMainD8Cut.iterrows():
+            customerOrder = row['客户订单号']
+            material = row['宝洁产品代码']
+
+            # 定义筛选条件
+            # condition = (
+            #     (self.dfMain['客户订单号'] == customerOrder) | 
+            #     (self.dfMain['客户订单号'].str.contains(customerOrder + 'xdc')) |
+            #     (self.dfMain['客户订单号'].str.contains(customerOrder + '_xdc')) |
+            #     (self.dfMain['客户订单号'].str.contains(customerOrder + '.'))
+            # )
+            
+            condition = (
+                (self.dfMain['宝洁产品代码'] == material) & 
+                (
+                    (self.dfMain['客户订单号'].str.contains(customerOrder + 'xdc')) |
+                    (self.dfMain['客户订单号'].str.contains(customerOrder + '_xdc')) |
+                    (self.dfMain['客户订单号'].str.contains(customerOrder + '.'))
+                )
+            )
+            
+            # 筛选出记录
+            dfTemp = self.dfMain[condition]
+            if dfTemp.shape[0] > 0:
+                deleteIndexList.append(index)
+
+        self.dfMain = self.dfMain.drop(deleteIndexList)
 
         self.dfMain.reset_index(drop=True, inplace=True)
         pass
