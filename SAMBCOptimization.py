@@ -362,7 +362,13 @@ class SAMBCOptimization:
                     # --------------不存在59 End--------------#
 
             # ---------------------找到有多条记录End---------------------#
-        
+
+            
+        # 当未满足数量为空时， 未满足原因代码为空
+        # self.dfMain.loc[self.dfMain['未满足数量'].isnull(), '未满足原因代码'] = None 输出是int32， 不是int64
+        self.dfMain['未满足数量'] = self.dfMain['未满足数量'].astype(int)
+        self.dfMain['未满足原因代码'] = self.dfMain['未满足原因代码'].astype('object')
+        self.dfMain.loc[self.dfMain['未满足数量'] == 0, '未满足原因代码'] = np.nan
 
         # 将dfMain的类型转成字符类型
         self.dfMain = self.dfMain.astype('object')
@@ -445,14 +451,26 @@ class SAMBCOptimization:
         if self.dfZEER is None:
             return
 
-        dfFiltered = self.dfZEER.loc[(self.dfZEER['Drops Err Message'].isin(self.zeerScreenConditionList)) & (
-                self.dfZEER['Material Quantity'] != 0)]
+        self.dfZEER['Material Quantity'] = self.dfZEER['Material Quantity'].astype(float)
+        # dfFiltered = self.dfZEER.loc[(self.dfZEER['Drops Err Message'].isin(self.zeerScreenConditionList)) & (
+        #         self.dfZEER['Material Quantity'] > 0)]
+        dfFiltered = self.dfZEER.loc[
+            (
+                (self.dfZEER['Drops Err Message'].str.contains(self.zeerScreenConditionList[0])) | 
+                (self.dfZEER['Drops Err Message'].str.contains(self.zeerScreenConditionList[1])) |
+                (self.dfZEER['Drops Err Message'].str.contains(self.zeerScreenConditionList[2]))
+            ) &
+                (self.dfZEER['Material Quantity'] > 0)
+            ]
 
         dfFiltered = PandasUtils.DeleteColumns(dfFiltered, self.zeerReservedColumnsList)
 
         dfFiltered.rename(columns=self.zeerReservedColumns, inplace=True)
 
         dfFiltered = PandasUtils.AppendColumnsToDf(dfFiltered, self.finalReportFieldList, dfFiltered.columns.to_list())
+
+        # 调整column顺序
+        dfFiltered.reindex(self.finalReportFieldList)
 
         self.dfMain = pd.concat([self.dfMain, dfFiltered])
 
@@ -525,12 +543,6 @@ class SAMBCOptimization:
         # 软转换产品对应新码去除前置0
         self.dfMain['软转换产品对应新码'] = self.dfMain['软转换产品对应新码'].str.lstrip('0')
 
-                
-        # 当未满足数量为空时， 未满足原因代码为空
-        # self.dfMain.loc[self.dfMain['未满足数量'].isnull(), '未满足原因代码'] = None 输出是int32， 不是int64
-        self.dfMain['未满足数量'] = self.dfMain['未满足数量'].astype(int)
-        self.dfMain['未满足原因代码'] = self.dfMain['未满足原因代码'].astype('object')
-        self.dfMain.loc[self.dfMain['未满足数量'] == 0, '未满足原因代码'] = np.nan
         pass
 
     def GenerateDailyReport(self):
@@ -643,8 +655,8 @@ if __name__ == '__main__':
 
         # 测试配置
         isJIT = False
-        marketName = 'GBJ'
-        strDocumentDate = '16.08.2023'
+        marketName = "CRV EAST-SUGUO-TESCO-CRV HQ"
+        strDocumentDate = '18.08.2023'
 
     # 实例化对象并且执行Main方法
     obj = SAMBCOptimization(isJIT, marketName, strDocumentDate)

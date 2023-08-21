@@ -102,11 +102,15 @@ class ExcelUtils:
             # wk.sheets[sheetName].range('A2').api.PasteSpecial()
             st = wk.sheets[sheetName]
 
-            # 获取AG列的范围
-            columnRange = st.range('AG:AG')
+            columnIndexList = ['K', 'O', 'AG']
+            for i in columnIndexList:
+                columnRange = st.range('%s:%s' % (i, i))
+                columnRange.number_format = '@'
+            # # 获取AG列的范围
+            # columnRange = st.range('AG:AG')
 
-            # 设置列的单元格格式为文本（字符串）
-            columnRange.number_format = '@'
+            # # 设置列的单元格格式为文本（字符串）
+            # columnRange.number_format = '@'
 
             # # 获取E、F、G列的范围
             # dateColumnRange = st.range('E:E,F:F,G:G')
