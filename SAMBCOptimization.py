@@ -363,7 +363,7 @@ class SAMBCOptimization:
 
             # ---------------------找到有多条记录End---------------------#
 
-            
+
         # 当未满足数量为空时， 未满足原因代码为空
         # self.dfMain.loc[self.dfMain['未满足数量'].isnull(), '未满足原因代码'] = None 输出是int32， 不是int64
         self.dfMain['未满足数量'] = self.dfMain['未满足数量'].astype(int)
@@ -463,11 +463,28 @@ class SAMBCOptimization:
                 (self.dfZEER['Material Quantity'] > 0)
             ]
 
-        dfFiltered = PandasUtils.DeleteColumns(dfFiltered, self.zeerReservedColumnsList)
+        # dfFiltered = PandasUtils.DeleteColumns(dfFiltered, self.zeerReservedColumnsList)
 
         dfFiltered.rename(columns=self.zeerReservedColumns, inplace=True)
 
         dfFiltered = PandasUtils.AppendColumnsToDf(dfFiltered, self.finalReportFieldList, dfFiltered.columns.to_list())
+
+        # 计算未满足数量
+        dfFiltered['未满足数量'] = dfFiltered['下单数量']
+
+
+        # 未满足原因代码， 未满足原因中文描述， 未满足单品补货指引
+        for item in self.zeerScreenConditionList:
+            # df = dfFiltered.loc[dfFiltered['Drops Err Message'].str.contains(item)]
+            dfCutReasonList = self.dfCutReasonList.loc[self.dfCutReasonList['Cut Reason'].str.contains(item)]
+            if dfCutReasonList.shape[0] > 0:
+                matchingRowIndex = dfFiltered['Drops Err Message'].str.contains(item)
+                dfFiltered.loc[matchingRowIndex, '未满足原因代码'] = dfCutReasonList.iloc[0]['Cut Reason']
+                # dfFiltered.loc[dfFiltered['Drops Err Message'].str.contains(item)]['未满足原因代码'] = dfCutReasonList.iloc[0]['Cut Reason']
+
+        # 删除掉不要的columns
+        # dfFiltered = PandasUtils.DeleteColumns(dfFiltered, self.zeerReservedColumnsList)
+        dfFiltered = PandasUtils.DeleteColumns(dfFiltered, self.finalReportFieldList)
 
         # 调整column顺序
         dfFiltered.reindex(self.finalReportFieldList)
@@ -601,11 +618,14 @@ class SAMBCOptimization:
         self.WritePriceListToDfMain()
         logger.info('Write Price List to dfMain')
 
+        self.FormatDfMain()
+        logger.info('Format dfMain')
+
         self.FillInDfMain()
         logger.info('Fill in dfMain')
 
-        self.FormatDfMain()
-        logger.info('Format dfMain')
+        # self.FormatDfMain()
+        # logger.info('Format dfMain')
 
         # self.dfMain.to_excel('%s output.xlsx' % self.marketName, index=False)
         # logger.info('Write %s output.xlsx' % self.marketName)

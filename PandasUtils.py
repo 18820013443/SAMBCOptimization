@@ -59,7 +59,7 @@ class PandasUtils:
             if not columnName in reservedColumnList:
                 appendColumnList.append(columnName)
 
-        # df[appendColumnList] = ""
+        df[appendColumnList] = ""
         return df
 
     @staticmethod
