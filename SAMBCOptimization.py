@@ -494,9 +494,15 @@ class SAMBCOptimization:
         self.dfMain.reset_index(drop=True, inplace=True)
 
     def WriteCustomerListToDfMain(self):
+        # PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
+        #                                     ['付运点代码'],
+        #                                     ['SAP Ship-to Code'],
+        #                                     ['渠道', '区域', '市场', '客户简称'],
+        #                                     ['Channel', 'Division', 'Market', 'Banner/RD Name'])
+
         PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
-                                            ['付运点代码'],
-                                            ['SAP Ship-to Code'],
+                                            ['客户代码'],
+                                            ['SAP Sold-to Code'],
                                             ['渠道', '区域', '市场', '客户简称'],
                                             ['Channel', 'Division', 'Market', 'Banner/RD Name'])
         pass
