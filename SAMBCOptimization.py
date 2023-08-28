@@ -500,7 +500,14 @@ class SAMBCOptimization:
         #                                     ['渠道', '区域', '市场', '客户简称'],
         #                                     ['Channel', 'Division', 'Market', 'Banner/RD Name'])
 
-        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
+        dfCustomerList = self.drop_duplicates(subset=['SAP Sold-to Code'], keep='first')
+
+        # PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
+        #                                     ['客户代码'],
+        #                                     ['SAP Sold-to Code'],
+        #                                     ['渠道', '区域', '市场', '客户简称'],
+        #                                     ['Channel', 'Division', 'Market', 'Banner/RD Name'])
+        PandasUtils.UpdateDfMainFromDfOther(self.dfMain, dfCustomerList,
                                             ['客户代码'],
                                             ['SAP Sold-to Code'],
                                             ['渠道', '区域', '市场', '客户简称'],
@@ -565,6 +572,9 @@ class SAMBCOptimization:
 
         # 软转换产品对应新码去除前置0
         self.dfMain['软转换产品对应新码'] = self.dfMain['软转换产品对应新码'].str.lstrip('0')
+
+        # 软转换产品对应新码去除前置0
+        self.dfMain['客户产品代码'] = self.dfMain['客户产品代码'].str.lstrip('0')
 
         pass
 
