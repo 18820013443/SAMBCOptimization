@@ -500,7 +500,7 @@ class SAMBCOptimization:
         #                                     ['渠道', '区域', '市场', '客户简称'],
         #                                     ['Channel', 'Division', 'Market', 'Banner/RD Name'])
 
-        dfCustomerList = self.drop_duplicates(subset=['SAP Sold-to Code'], keep='first')
+        dfCustomerList = self.dfCustomerList.drop_duplicates(subset=['SAP Sold-to Code'], keep='first')
 
         # PandasUtils.UpdateDfMainFromDfOther(self.dfMain, self.dfCustomerList,
         #                                     ['客户代码'],
