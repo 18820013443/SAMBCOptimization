@@ -561,6 +561,9 @@ class SAMBCOptimization:
         # self.dfMain['分货日'] = self.dfMain['分货日'].str.slice(0, 10).str.replace('-', '/')
         # self.dfMain['到货日'] = self.dfMain['到货日'].str.slice(0, 10).str.replace('-', '/')
 
+        # 将dfMain的类型转成字符类型
+        self.dfMain = self.dfMain.astype('object')
+
         # 宝洁订单号去除前置0
         self.dfMain['宝洁订单号'] = self.dfMain['宝洁订单号'].str.lstrip('0')
 
